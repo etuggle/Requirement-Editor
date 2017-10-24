@@ -9,6 +9,9 @@
 #import "ViewController.h"
 
 @implementation ViewController
+@synthesize marrXMLData;
+@synthesize mstrXMLString;
+@synthesize mdictXMLPart;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,5 +26,35 @@
     // Update the view, if already loaded.
 }
 
+- (IBAction)foo:(NSButton *)sender {
+}
 
+- (IBAction) openDocument:() sender {
+    NSLog(@"open document");
+    NSOpenPanel* panel = [NSOpenPanel openPanel];
+    
+    // This method displays the panel and returns immediately.
+    // The completion handler is called when the user selects an
+    // item or cancels the panel.
+    [panel beginWithCompletionHandler:^(NSInteger result){
+        if (result == NSFileHandlingPanelOKButton) {
+            NSURL*  theDoc = [[panel URLs] objectAtIndex:0];
+            NSString * filePath = [theDoc path];
+            
+            [_FileLabel setStringValue:(filePath)];
+            // Open  the document.
+            //NSXMLParser *xmlparser = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:filePath]];
+            NSXMLParser *xmlparser = [[NSXMLParser alloc] initWithContentsOfURL:theDoc];
+            [xmlparser setDelegate:self];
+            [xmlparser parse];
+            NSError * e = [xmlparser parserError];
+            NSLog(@"Error String: %@", e.localizedDescription);
+            NSLog(@"Count: %lu", marrXMLData.count);
+            NSLog(@"Data: %@", marrXMLData);
+            FILE *f = fopen([filePath cStringUsingEncoding:NSUTF8StringEncoding], "r");
+            fclose(f);
+        }
+        
+    }];
+}
 @end
