@@ -9,12 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "TestExecElement.h"
 @implementation TestExecElement
-/*
-@synthesize mName;
-@synthesize mUid;
-@synthesize mDbId;
-@synthesize mDescription;
-*/
+
+@synthesize mName=_mName;
+@synthesize mUid=_mUid;
+@synthesize mDbId=_mDbId;
+@synthesize mDescription=_mDescription;
 
 - (instancetype)initWithDict:(NSDictionary *)dict
 {

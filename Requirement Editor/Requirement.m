@@ -28,8 +28,8 @@
     return self;
 }
 - (NSString *)description {
-    return [NSString stringWithFormat: @"<Requirement dbid=\"%d\" Name=\"%@\" status=\"%@\" uid=\"%d\">", _mDbId,
-            _mName, _mStatus, _mUid];
+    return [NSString stringWithFormat: @"<Requirement dbid=\"%d\" Name=\"%@\" status=\"%@\" uid=\"%d\">", mDbid,
+            mName, _mStatus, mUid];
     
 }
 @end
