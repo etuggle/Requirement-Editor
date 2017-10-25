@@ -7,11 +7,10 @@
 //
 
 #import "ViewController.h"
+#import "XmlParserDelegate.h"
 
 @implementation ViewController
-@synthesize marrXMLData;
-@synthesize mstrXMLString;
-@synthesize mdictXMLPart;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,14 +44,15 @@
             // Open  the document.
             //NSXMLParser *xmlparser = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:filePath]];
             NSXMLParser *xmlparser = [[NSXMLParser alloc] initWithContentsOfURL:theDoc];
-            [xmlparser setDelegate:self];
+            
+            XmlParserDelegate *parserDelegate = [[XmlParserDelegate alloc] init];
+            [xmlparser setDelegate:parserDelegate];
             [xmlparser parse];
-            NSError * e = [xmlparser parserError];
-            NSLog(@"Error String: %@", e.localizedDescription);
-            NSLog(@"Count: %lu", marrXMLData.count);
-            NSLog(@"Data: %@", marrXMLData);
-            FILE *f = fopen([filePath cStringUsingEncoding:NSUTF8StringEncoding], "r");
-            fclose(f);
+            //NSError * e = [xmlparser parserError];
+            //NSLog(@"Error String: %@", e.localizedDescription);
+            //NSLog(@"Count: %lu", marrXMLData.count);
+            //NSLog(@"Data: %@", marrXMLData);
+            
         }
         
     }];

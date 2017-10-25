@@ -11,8 +11,6 @@
 @interface ViewController : NSViewController
 @property (weak) IBOutlet NSTextField *project;
 @property (weak) IBOutlet NSTextField *FileLabel;
-@property (nonatomic,strong) NSMutableArray *marrXMLData;
-@property (nonatomic,strong) NSMutableString *mstrXMLString;
-@property (nonatomic,strong) NSMutableDictionary *mdictXMLPart;
+
 @end
 

@@ -14,6 +14,10 @@
 		2C256CB61F990320004F8E5B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C256CB51F990320004F8E5B /* main.m */; };
 		2C256CC11F990320004F8E5B /* Requirement_EditorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C256CC01F990320004F8E5B /* Requirement_EditorTests.m */; };
 		2C256CCC1F990320004F8E5B /* Requirement_EditorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C256CCB1F990320004F8E5B /* Requirement_EditorUITests.m */; };
+		2CC0CC641FA0D0AA001737F5 /* XmlParserDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0CC631FA0D0AA001737F5 /* XmlParserDelegate.m */; };
+		2CC0CC681FA0E308001737F5 /* Requirement.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0CC671FA0E308001737F5 /* Requirement.m */; };
+		2CC0CC6B1FA0F787001737F5 /* Association.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0CC6A1FA0F787001737F5 /* Association.m */; };
+		2CC0CC6E1FA12637001737F5 /* TestExecElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0CC6D1FA12637001737F5 /* TestExecElement.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +54,14 @@
 		2C256CC71F990320004F8E5B /* Requirement EditorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Requirement EditorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C256CCB1F990320004F8E5B /* Requirement_EditorUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Requirement_EditorUITests.m; sourceTree = "<group>"; };
 		2C256CCD1F990320004F8E5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CC0CC631FA0D0AA001737F5 /* XmlParserDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XmlParserDelegate.m; sourceTree = "<group>"; };
+		2CC0CC651FA0D10E001737F5 /* XmlParserDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XmlParserDelegate.h; sourceTree = "<group>"; };
+		2CC0CC661FA0E285001737F5 /* Requirement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Requirement.h; sourceTree = "<group>"; };
+		2CC0CC671FA0E308001737F5 /* Requirement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Requirement.m; sourceTree = "<group>"; };
+		2CC0CC691FA0F70C001737F5 /* Association.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Association.h; sourceTree = "<group>"; };
+		2CC0CC6A1FA0F787001737F5 /* Association.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Association.m; sourceTree = "<group>"; };
+		2CC0CC6C1FA12402001737F5 /* TestExecElement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestExecElement.h; sourceTree = "<group>"; };
+		2CC0CC6D1FA12637001737F5 /* TestExecElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestExecElement.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +121,14 @@
 				2C256CB41F990320004F8E5B /* Info.plist */,
 				2C256CB51F990320004F8E5B /* main.m */,
 				2C256CB71F990320004F8E5B /* Requirement_Editor.entitlements */,
+				2CC0CC631FA0D0AA001737F5 /* XmlParserDelegate.m */,
+				2CC0CC651FA0D10E001737F5 /* XmlParserDelegate.h */,
+				2CC0CC661FA0E285001737F5 /* Requirement.h */,
+				2CC0CC691FA0F70C001737F5 /* Association.h */,
+				2CC0CC6A1FA0F787001737F5 /* Association.m */,
+				2CC0CC671FA0E308001737F5 /* Requirement.m */,
+				2CC0CC6C1FA12402001737F5 /* TestExecElement.h */,
+				2CC0CC6D1FA12637001737F5 /* TestExecElement.m */,
 			);
 			path = "Requirement Editor";
 			sourceTree = "<group>";
@@ -264,8 +284,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C256CAE1F990320004F8E5B /* ViewController.m in Sources */,
+				2CC0CC681FA0E308001737F5 /* Requirement.m in Sources */,
 				2C256CB61F990320004F8E5B /* main.m in Sources */,
 				2C256CAB1F990320004F8E5B /* AppDelegate.m in Sources */,
+				2CC0CC641FA0D0AA001737F5 /* XmlParserDelegate.m in Sources */,
+				2CC0CC6B1FA0F787001737F5 /* Association.m in Sources */,
+				2CC0CC6E1FA12637001737F5 /* TestExecElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
