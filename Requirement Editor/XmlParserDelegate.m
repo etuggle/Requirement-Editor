@@ -10,34 +10,24 @@
 #import "XmlParserDelegate.h"
 
 @implementation XmlParserDelegate
-@synthesize marrXMLData;
-@synthesize mstrXMLString;
-@synthesize mdictXMLPart;
-@synthesize mRequirements;
-@synthesize mCurrentElementName;
-@synthesize mCurrentRequirement;
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser{
     NSLog(@"File found and parsing started");
+    _mstrXMLString = nil;
     
 }
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString     *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict;
 {
+    _mCurrentElementName = elementName;
+    
     if ([elementName isEqualToString:@"Requirements"]) {
         //marrXMLData = [[NSMutableArray alloc] init];
-        mRequirements = [[NSMutableArray alloc] init];
+        _mRequirements = [[NSMutableArray alloc] init];
     } else if ([elementName isEqualToString:@"Coverage"]) {
-        mCurrentRequirement.mAssociations = [[NSMutableArray alloc] init];
+        _mCurrentRequirement.mAssociations = [[NSMutableArray alloc] init];
     } else if ([elementName isEqualToString:@"Requirement"]) {
-        mCurrentElementName = elementName;
-        mdictXMLPart = [[NSMutableDictionary alloc] init];
-        mCurrentRequirement = [Requirement alloc];
-        mCurrentRequirement.mDbId = [attributeDict[@"dbid"] intValue];
-        mCurrentRequirement.mName = attributeDict[@"name"];
-        mCurrentRequirement.mStatus = attributeDict[@"status"];
-        mCurrentRequirement.mUid = [attributeDict[@"uid"] intValue];
-        [mRequirements addObject:mCurrentRequirement];
-        NSLog(@"%@",mCurrentRequirement);
+        _mCurrentRequirement = [[Requirement alloc] initWithDict:attributeDict];
+        [_mRequirements addObject:_mCurrentRequirement];
     } else if([elementName isEqualToString:@"Association"]) {
         // An Association element is associated with Requirement and
         // TestDefination elements.
@@ -46,43 +36,56 @@
         // encloses the Association in a Covers element.
         
         Association *a = [[Association alloc]initWithDict:attributeDict];
-        if ([mCurrentElementName isEqualToString:@"Requirement"]) {
+        if (_mCurrentRequirement != nil) {
             // Process the Association element for the requirment
-            Association *a = [Association alloc];
-            
-            [mAssociations addObject:a];
+            [_mCurrentRequirement addAssociation:a];
+        } else {
+            // Process the Association element for the test definition
         }
     }
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string;
 {
-    //NSLog(@"%@", string);
-    if (!mstrXMLString) {
-        mstrXMLString = [[NSMutableString alloc] initWithString:string];
+    string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if (!_mstrXMLString) {
+        _mstrXMLString = [[NSMutableString alloc] initWithString:string];
     }
     else {
-        [mstrXMLString appendString:string];
+        [_mstrXMLString appendString:string];
     }
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName;
 {
     //NSLog(@"%@", elementName);
-    if ([mCurrentElementName isEqualToString:(@"Requirement")]) {
-        //[mdictXMLPart setObject:mstrXMLString forKey:elementName];
+    if (_mCurrentRequirement != nil) {
+        
         if ([elementName isEqualToString:@"Requirement"]) {
-        //    [marrXMLData addObject:mdictXMLPart];
-            NSLog(@"Close requirement %@",mCurrentRequirement.mName);
-            mCurrentElementName = nil;
-            mCurrentRequirement = nil;
+            NSLog(@"%@",_mCurrentRequirement);
+            NSMutableArray *associations = [_mCurrentRequirement getAssociations];
+            unsigned long numAssociations = [associations count];
+            for (int i=0; i<numAssociations; i++) {
+                NSLog(@"%@", associations[i] );
+            }
+            NSLog(@"Close requirement %@",_mCurrentRequirement.mName);
+            _mCurrentElementName = nil;
+            _mCurrentRequirement = nil;
+        } else if ([_mCurrentElementName isEqualToString:@"Description"]) {
+            [self setDescription:_mstrXMLString];
         } else {
             NSLog(@"%@", elementName);
         }
         
-        mstrXMLString = nil;
     }
-    
+    _mstrXMLString = nil;
 }
 
+- (void) setDescription:(NSString *)desc {
+    if (_mCurrentRequirement != nil) {
+        [_mCurrentRequirement setMDescription:desc];
+    } else {
+        // Set the description on the test def
+    }
+}
 @end

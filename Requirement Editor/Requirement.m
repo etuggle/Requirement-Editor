@@ -11,16 +11,6 @@
 
 @implementation Requirement
 
-/*
-@synthesize mStatus;
-@synthesize mAssociations;
-@synthesize mExternalId;
-@synthesize mManualStatus;
-@synthesize mReviewedBy;
-@synthesize mAssignedTo;
-@synthesize mVerificationMethod;
-@synthesize mProjectId;
- */
 - (instancetype)initWithDict:(NSDictionary *)dict
 {
     self = [super initWithDict:dict];
@@ -28,8 +18,13 @@
     return self;
 }
 - (NSString *)description {
-    return [NSString stringWithFormat: @"<Requirement dbid=\"%d\" Name=\"%@\" status=\"%@\" uid=\"%d\">", mDbid,
-            mName, _mStatus, mUid];
+    return [NSString stringWithFormat: @"<Requirement dbid=\"%d\" Name=\"%@\" status=\"%@\" uid=\"%d\">\n    <Description>%@</Description>", _mDbid, _mName, _mStatus, _mUid, _mDescription];
     
+}
+- (NSMutableArray *) getAssociations {
+    return _mAssociations;
+}
+- (void) addAssociation:(Association *)association {
+    [_mAssociations addObject:association];
 }
 @end

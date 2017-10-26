@@ -9,17 +9,17 @@
 #ifndef TestExecElement_h
 #define TestExecElement_h
 @interface TestExecElement : NSObject {
-    NSString *mName;
-    NSString *mDescription;
-    int mDbid;
-    int mUid;
+    NSString *_mName;
+    NSString *_mDescription;
+    int _mDbid;
+    int _mUid;
 }
 -(instancetype)initWithDict:(NSDictionary *)dict NS_DESIGNATED_INITIALIZER;
 -(instancetype)init NS_UNAVAILABLE;
 
-@property (nonatomic,readwrite, assign) NSString *mName;
+@property (nonatomic,strong) NSString *mName;
 @property (nonatomic,strong) NSString *mDescription;
-@property (nonatomic, readwrite, assign) int mDbId;
+@property (nonatomic, readwrite, assign) int mDbid;
 @property (nonatomic, readwrite, assign) int mUid;
 
 @end

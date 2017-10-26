@@ -10,17 +10,12 @@
 #import "TestExecElement.h"
 @implementation TestExecElement
 
-@synthesize mName=_mName;
-@synthesize mUid=_mUid;
-@synthesize mDbId=_mDbId;
-@synthesize mDescription=_mDescription;
-
 - (instancetype)initWithDict:(NSDictionary *)dict
 {
     self = [super init];
     
     _mName = dict[@"name"];
-    _mDbId = [dict[@"dbid"] intValue];
+    _mDbid = [dict[@"dbid"] intValue];
     _mUid = [dict[@"uid"] intValue];
     _mDescription = nil;
     return self;

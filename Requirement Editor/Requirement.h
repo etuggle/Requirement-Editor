@@ -10,17 +10,16 @@
 #define Requirement_h
 #import <Cocoa/Cocoa.h>
 #import "TestExecElement.h"
+#import "Association.h"
 
 @interface Requirement : TestExecElement
-
+-(void)addAssociation:(Association *)association;
+-(NSMutableArray *) getAssociations;
 -(instancetype)initWithDict:(NSDictionary *)dict NS_DESIGNATED_INITIALIZER;
 -(instancetype)init NS_UNAVAILABLE;
 
-//@property (nonatomic) int mDbId;
-//@property (nonatomic,strong) NSString *mName;
+
 @property (nonatomic,strong)NSString *mStatus;
-//@property (nonatomic) int mUid;
-//@property (nonatomic,strong) NSString *mDescription;
 @property (nonatomic,strong) NSMutableArray *mAssociations;
 @property (nonatomic,strong) NSString *mExternalId;
 @property (nonatomic,strong) NSString *mManualStatus;
