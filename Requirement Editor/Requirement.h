@@ -18,12 +18,12 @@
 -(instancetype)init NS_UNAVAILABLE;
 
 
-@property (nonatomic,strong) NSString *mExternalId;
-@property (nonatomic,strong) NSString *mManualStatus;
-@property (nonatomic,strong) NSString *mReviewedBy;
-@property (nonatomic,strong) NSString *mAssignedTo;
-@property (nonatomic,strong) NSString *mVerificationMethod;
-@property (nonatomic)int *mProjectId;
+@property (nonatomic,strong) NSString *externalId;
+@property (nonatomic,strong) NSString *manualStatus;
+@property (nonatomic,strong) NSString *reviewedBy;
+@property (nonatomic,strong) NSString *assignedTo;
+@property (nonatomic,strong) NSString *verificationMethod;
+@property (nonatomic)int mProjectId;
 
 @end
 

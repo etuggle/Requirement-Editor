@@ -73,7 +73,20 @@
         [_currentElement setMDescription:_mstrXMLString];
     } else if ([_mCurrentElementName isEqualToString:@"Project"]) {
         [_mProject setMDescription:_mstrXMLString];
-    } else {
+    } else if ([_mCurrentElementName isEqualToString:@"ExternalID"]) {
+        [_currentRequirement setExternalId:_mstrXMLString];
+    } else if ([_mCurrentElementName isEqualToString:@"ManualStatus"]) {
+         [_currentRequirement setManualStatus:_mstrXMLString];
+    }else if ([_mCurrentElementName isEqualToString:@"ReviewedBy"]) {
+        [_currentRequirement setReviewedBy:_mstrXMLString];
+    }else if ([_mCurrentElementName isEqualToString:@"AssignedTo"]) {
+        [_currentRequirement setAssignedTo:_mstrXMLString];
+    }else if ([_mCurrentElementName isEqualToString:@"VerificationMethod"]) {
+        [_currentRequirement setVerificationMethod:_mstrXMLString];
+    }else if ([_mCurrentElementName isEqualToString:@"ProjectID"]) {
+        [_currentRequirement setMProjectId:[_mstrXMLString intValue]];
+    }
+    else {
         NSLog(@"%@", elementName);
     }
     _mstrXMLString = nil;
