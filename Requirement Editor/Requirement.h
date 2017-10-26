@@ -6,8 +6,7 @@
 //  Copyright © 2017 etbits.coms. All rights reserved.
 //
 
-#ifndef Requirement_h
-#define Requirement_h
+
 #import <Cocoa/Cocoa.h>
 #import "AssociatedElement.h"
 #import "Association.h"
@@ -27,4 +26,3 @@
 
 @end
 
-#endif /* Requirement_h */
