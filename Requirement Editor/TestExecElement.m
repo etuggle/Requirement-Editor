@@ -12,6 +12,7 @@
 
 - (instancetype)initWithDict:(NSDictionary *)dict
 {
+    // Call superclass constructor
     self = [super init];
 
     _mName = dict[@"name"];
