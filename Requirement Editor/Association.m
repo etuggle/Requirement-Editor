@@ -9,30 +9,25 @@
 #import <Foundation/Foundation.h>
 #import "Association.h"
 @implementation Association
-@synthesize mName;
-@synthesize mStatus;
-@synthesize mUid;
-@synthesize mType;
-@synthesize mExternalId;
 
 - (instancetype)initWithDict:(NSDictionary *)dict
 {
     self = [super init];
-    mType = dict[@"type"];
-    mName = dict[@"name"];
-    mUid = [dict[@"uid"] intValue];
-    mStatus = dict[@"status"];
-    mType = dict[@"type"];
+    _mType = dict[@"type"];
+    _mName = dict[@"name"];
+    _mUid = [dict[@"uid"] intValue];
+    _mStatus = dict[@"status"];
+    _mType = dict[@"type"];
     return self;
 }
 
 - (NSString *)description {
     NSString *formattedString;
     //When the type is TestDefinition the Association is associated with a Requirement
-    if ([mType isEqualToString:@"TestDefinition"]) {
-        formattedString = [NSString stringWithFormat:@"<Association name=\"%@\" status=\"%@\" type=\"%@\" uid=\"%d\" />", mName, mStatus, mType, mUid];
+    if ([_mType isEqualToString:@"TestDefinition"]) {
+        formattedString = [NSString stringWithFormat:@"<Association name=\"%@\" status=\"%@\" type=\"%@\" uid=\"%d\" />", _mName, _mStatus, _mType, _mUid];
     } else {
-        formattedString = [NSString stringWithFormat:@"<Association ExternalID=\"%@\" name=\"%@\" type=\"%@\" uid=\"%d\" />", mExternalId, mName, mType, mUid];
+        formattedString = [NSString stringWithFormat:@"<Association ExternalID=\"%@\" name=\"%@\" type=\"%@\" uid=\"%d\" />", _mExternalId, _mName, _mType, _mUid];
     }
     return formattedString;
 }

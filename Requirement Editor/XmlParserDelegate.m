@@ -20,14 +20,17 @@
 {
     _mCurrentElementName = elementName;
     
-    if ([elementName isEqualToString:@"Requirements"]) {
+    if ([elementName isEqualToString:@"Project"]){
+        _mProject = [[Project alloc] initWithDict:attributeDict];
+    } else if ([elementName isEqualToString:@"Requirements"]) {
         //marrXMLData = [[NSMutableArray alloc] init];
         _mRequirements = [[NSMutableArray alloc] init];
     } else if ([elementName isEqualToString:@"Coverage"]) {
-        _mCurrentRequirement.mAssociations = [[NSMutableArray alloc] init];
+        [_currentElement setMAssociations:[[NSMutableArray alloc] init]];
     } else if ([elementName isEqualToString:@"Requirement"]) {
-        _mCurrentRequirement = [[Requirement alloc] initWithDict:attributeDict];
-        [_mRequirements addObject:_mCurrentRequirement];
+        _currentRequirement = [[Requirement alloc] initWithDict:attributeDict];
+        [_mRequirements addObject:_currentRequirement];
+        _currentElement = _currentRequirement;
     } else if([elementName isEqualToString:@"Association"]) {
         // An Association element is associated with Requirement and
         // TestDefination elements.
@@ -36,12 +39,8 @@
         // encloses the Association in a Covers element.
         
         Association *a = [[Association alloc]initWithDict:attributeDict];
-        if (_mCurrentRequirement != nil) {
-            // Process the Association element for the requirment
-            [_mCurrentRequirement addAssociation:a];
-        } else {
-            // Process the Association element for the test definition
-        }
+        // Process the Association element for the requirment
+        [_currentElement addAssociation:a];
     }
 }
 
@@ -59,32 +58,25 @@
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName;
 {
     //NSLog(@"%@", elementName);
-    if (_mCurrentRequirement != nil) {
-        
-        if ([elementName isEqualToString:@"Requirement"]) {
-            NSLog(@"%@",_mCurrentRequirement);
-            NSMutableArray *associations = [_mCurrentRequirement getAssociations];
-            unsigned long numAssociations = [associations count];
-            for (int i=0; i<numAssociations; i++) {
-                NSLog(@"%@", associations[i] );
-            }
-            NSLog(@"Close requirement %@",_mCurrentRequirement.mName);
-            _mCurrentElementName = nil;
-            _mCurrentRequirement = nil;
-        } else if ([_mCurrentElementName isEqualToString:@"Description"]) {
-            [self setDescription:_mstrXMLString];
-        } else {
-            NSLog(@"%@", elementName);
+    if ([elementName isEqualToString:@"Requirement"]) {
+        NSLog(@"%@",_currentElement);
+        NSMutableArray *associations = [_currentElement getAssociations];
+        unsigned long numAssociations = [associations count];
+        for (int i=0; i<numAssociations; i++) {
+            NSLog(@"%@", associations[i] );
         }
+        
+        NSLog(@"Close requirement %@",_currentElement.mName);
+        _mCurrentElementName = nil;
+        _currentElement = nil;
+    } else if ([_mCurrentElementName isEqualToString:@"Description"]) {
+        [_currentElement setMDescription:_mstrXMLString];
+    } else if ([_mCurrentElementName isEqualToString:@"Project"]) {
+        [_mProject setMDescription:_mstrXMLString];
+    } else {
+        NSLog(@"%@", elementName);
     }
     _mstrXMLString = nil;
 }
 
-- (void) setDescription:(NSString *)desc {
-    if (_mCurrentRequirement != nil) {
-        [_mCurrentRequirement setMDescription:desc];
-    } else {
-        // Set the description on the test def
-    }
-}
 @end

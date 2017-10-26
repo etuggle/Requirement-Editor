@@ -6,8 +6,8 @@
 //  Copyright © 2017 etbits.coms. All rights reserved.
 //
 
-#ifndef TestExecElement_h
-#define TestExecElement_h
+
+#import <Foundation/Foundation.h>
 @interface TestExecElement : NSObject {
     NSString *_mName;
     NSString *_mDescription;
@@ -24,4 +24,4 @@
 @property (nonatomic, readwrite, assign) int mUid;
 
 @end
-#endif /* TestExecElement_h */
+
