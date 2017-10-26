@@ -13,7 +13,17 @@
 - (instancetype)initWithDict:(NSDictionary *)dict
 {
     self = [super initWithDict:dict];
+    _requirements = [[NSMutableArray alloc] init];
+    _testSequences = [[NSMutableArray alloc] init];
+    
     _mPythonPath = dict[@"PythonPath"];
     return self;
+}
+
+- (void) addTestSequence:(TestSequence *)sequence {
+    [_testSequences addObject:sequence];
+}
+- (void) addRequirement:(Requirement *)req {
+    [_requirements addObject:req];
 }
 @end

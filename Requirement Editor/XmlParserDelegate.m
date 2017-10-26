@@ -24,13 +24,14 @@
         _mProject = [[Project alloc] initWithDict:attributeDict];
     } else if ([elementName isEqualToString:@"Requirements"]) {
         //marrXMLData = [[NSMutableArray alloc] init];
-        _mRequirements = [[NSMutableArray alloc] init];
+        
     } else if ([elementName isEqualToString:@"Coverage"]) {
         [_currentElement setMAssociations:[[NSMutableArray alloc] init]];
     } else if ([elementName isEqualToString:@"Requirement"]) {
         _currentRequirement = [[Requirement alloc] initWithDict:attributeDict];
-        [_mRequirements addObject:_currentRequirement];
+        [_mProject addRequirement:_currentRequirement];
         _currentElement = _currentRequirement;
+        _topElement = _currentRequirement;
     } else if([elementName isEqualToString:@"Association"]) {
         // An Association element is associated with Requirement and
         // TestDefination elements.
@@ -41,6 +42,19 @@
         Association *a = [[Association alloc]initWithDict:attributeDict];
         // Process the Association element for the requirment
         [_currentElement addAssociation:a];
+    } else if ([elementName isEqualToString:@"TestPlan"]) {
+        // Allocate room for Test Sequences
+        [_mProject setTestSequences:[NSMutableArray init]];
+    } else if ([elementName isEqualToString:@"TestSequence"]) {
+        // Create a sequence and add it to the project
+        _currentTestSequence = [[TestSequence alloc] initWithDict:attributeDict];
+        [_mProject addTestSequence:_currentTestSequence];
+        _topElement = _currentTestSequence;
+    } else if ([elementName isEqualToString:@"TestDefinition"]) {
+        // Create a Test Definition and add it to the current sequence
+        _currentTestDefinition = [[_currentTestDefinition alloc] initWithDict:attributeDict];
+        [_currentTestDefinition addTestSequence:_currentTestSequence];
+        _topElement = _currentTestSequence;
     }
 }
 
@@ -68,9 +82,10 @@
         
         NSLog(@"Close requirement %@",_currentElement.mName);
         _mCurrentElementName = nil;
+        _topElement = nil;
         _currentElement = nil;
     } else if ([_mCurrentElementName isEqualToString:@"Description"]) {
-        [_currentElement setMDescription:_mstrXMLString];
+        [_topElement setMDescription:_mstrXMLString];
     } else if ([_mCurrentElementName isEqualToString:@"Project"]) {
         [_mProject setMDescription:_mstrXMLString];
     } else if ([_mCurrentElementName isEqualToString:@"ExternalID"]) {

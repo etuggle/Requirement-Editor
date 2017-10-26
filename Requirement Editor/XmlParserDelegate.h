@@ -12,16 +12,20 @@
 #import "Project.h"
 #import "Requirement.h"
 #import "Association.h"
+#import "TestDefinition.h"
 
 @interface XmlParserDelegate : NSObject <NSXMLParserDelegate>
 @property (nonatomic, strong) Project *mProject;
 
 @property (nonatomic,strong) NSMutableArray *marrXMLData;
-@property (nonatomic,strong) NSMutableArray *mRequirements;
 @property (nonatomic,strong) NSMutableString *mstrXMLString;
 @property (nonatomic,strong) NSMutableDictionary *mdictXMLPart;
 @property (nonatomic,strong) NSString *mCurrentElementName;
 @property (nonatomic,strong) AssociatedElement * currentElement;
+@property (nonatomic,strong) TestExecElement *topElement;
 @property (nonatomic,strong) Requirement *currentRequirement;
+@property (nonatomic,strong) TestSequence *currentTestSequence;
+@property (nonatomic,strong) TestDefinition *currentTestDefinition;
+
 @end
 #endif /* XmlParserDelegate_h */
