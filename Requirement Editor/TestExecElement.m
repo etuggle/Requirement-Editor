@@ -13,7 +13,7 @@
 - (instancetype)initWithDict:(NSDictionary *)dict
 {
     self = [super init];
-    
+
     _mName = dict[@"name"];
     _mDbid = [dict[@"dbid"] intValue];
     _mUid = [dict[@"uid"] intValue];

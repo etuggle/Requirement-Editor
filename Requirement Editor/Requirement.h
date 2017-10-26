@@ -18,7 +18,6 @@
 -(instancetype)initWithDict:(NSDictionary *)dict NS_DESIGNATED_INITIALIZER;
 -(instancetype)init NS_UNAVAILABLE;
 
-
 @property (nonatomic,strong)NSString *mStatus;
 @property (nonatomic,strong) NSMutableArray *mAssociations;
 @property (nonatomic,strong) NSString *mExternalId;

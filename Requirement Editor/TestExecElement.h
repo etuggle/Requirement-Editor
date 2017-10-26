@@ -14,6 +14,7 @@
     int _mDbid;
     int _mUid;
 }
+
 -(instancetype)initWithDict:(NSDictionary *)dict NS_DESIGNATED_INITIALIZER;
 -(instancetype)init NS_UNAVAILABLE;
 
@@ -23,5 +24,4 @@
 @property (nonatomic, readwrite, assign) int mUid;
 
 @end
-
 #endif /* TestExecElement_h */

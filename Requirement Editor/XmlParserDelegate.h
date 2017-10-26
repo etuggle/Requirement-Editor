@@ -20,5 +20,4 @@
 @property (nonatomic,strong) NSString *mCurrentElementName;
 @property (nonatomic,strong) Requirement * mCurrentRequirement;
 @end
-
 #endif /* XmlParserDelegate_h */

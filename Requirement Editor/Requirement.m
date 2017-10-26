@@ -19,8 +19,8 @@
 }
 - (NSString *)description {
     return [NSString stringWithFormat: @"<Requirement dbid=\"%d\" Name=\"%@\" status=\"%@\" uid=\"%d\">\n    <Description>%@</Description>", _mDbid, _mName, _mStatus, _mUid, _mDescription];
-    
 }
+
 - (NSMutableArray *) getAssociations {
     return _mAssociations;
 }

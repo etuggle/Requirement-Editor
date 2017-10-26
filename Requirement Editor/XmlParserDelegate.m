@@ -76,7 +76,6 @@
         } else {
             NSLog(@"%@", elementName);
         }
-        
     }
     _mstrXMLString = nil;
 }

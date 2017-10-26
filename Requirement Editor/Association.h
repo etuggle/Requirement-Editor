@@ -19,7 +19,6 @@
 @property (nonatomic,strong) NSString *mType;
 @property (nonatomic,strong) NSString *mExternalId;
 @property (nonatomic) int mUid;
-
 @end
 
 #endif /* Association_h */

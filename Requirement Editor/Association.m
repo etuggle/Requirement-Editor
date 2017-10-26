@@ -15,7 +15,6 @@
 @synthesize mType;
 @synthesize mExternalId;
 
-
 - (instancetype)initWithDict:(NSDictionary *)dict
 {
     self = [super init];

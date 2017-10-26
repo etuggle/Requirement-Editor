@@ -27,7 +27,7 @@
 
 - (IBAction)foo:(NSButton *)sender {
 }
-
+ 
 - (IBAction) openDocument:() sender {
     NSLog(@"open document");
     NSOpenPanel* panel = [NSOpenPanel openPanel];
