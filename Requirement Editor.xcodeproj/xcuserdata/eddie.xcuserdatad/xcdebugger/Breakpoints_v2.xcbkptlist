@@ -25,8 +25,8 @@
                   symbolName = "-[Association mName]"
                   moduleName = "Requirement Editor"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eddie/Documents/xcode/Requirement%20Editor/Requirement%20Editor/Association.h"
-                  timestampString = "530737706.98422"
+                  urlString = "file:///Users/eddie/git/Requirement-Editor/Requirement%20Editor/Association.h"
+                  timestampString = "531195666.837474"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "17"
@@ -40,8 +40,8 @@
                   symbolName = "-[Association setMName:]"
                   moduleName = "Requirement Editor"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eddie/Documents/xcode/Requirement%20Editor/Requirement%20Editor/Association.h"
-                  timestampString = "530737706.985652"
+                  urlString = "file:///Users/eddie/git/Requirement-Editor/Requirement%20Editor/Association.h"
+                  timestampString = "531195666.839856"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "17"
@@ -49,6 +49,23 @@
                   offsetFromSymbolStart = "49">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            condition = "[elementName isEqualToString:@&quot;Requirements&quot;]"
+            continueAfterRunningActions = "No"
+            filePath = "Requirement Editor/XmlParserDelegate.m"
+            timestampString = "531195666.476297"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "-parser:didEndElement:namespaceURI:qualifiedName:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

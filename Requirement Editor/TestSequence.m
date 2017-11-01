@@ -17,4 +17,7 @@
 - (NSString *)description {
     return [NSString stringWithFormat: @"<Requirement dbid=\"%d\" Name=\"%@\" uid=\"%d\">\n    <Description>%@</Description>", _mDbid, _mName, _mUid, _mDescription];
 }
+- (void) addTestDefinition:(TestDefinition *)testDef {
+    [_testDefinitions addObject:testDef];
+}
 @end

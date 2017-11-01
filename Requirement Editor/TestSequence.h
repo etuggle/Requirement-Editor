@@ -7,10 +7,12 @@
 //
 
 #import "TestExecElement.h"
+#import "TestDefinition.h"
 
 @interface TestSequence : TestExecElement
 -(instancetype)initWithDict:(NSDictionary *)dict NS_DESIGNATED_INITIALIZER;
 -(instancetype)init NS_UNAVAILABLE;
+- (void) addTestDefinition:(TestDefinition *)testDef;
 
 @property (nonatomic,strong) NSMutableArray *testDefinitions;
 

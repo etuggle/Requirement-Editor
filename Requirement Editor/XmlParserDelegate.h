@@ -26,6 +26,7 @@
 @property (nonatomic,strong) Requirement *currentRequirement;
 @property (nonatomic,strong) TestSequence *currentTestSequence;
 @property (nonatomic,strong) TestDefinition *currentTestDefinition;
+@property (nonatomic,strong) Script *currentScript;
 
 @end
 #endif /* XmlParserDelegate_h */

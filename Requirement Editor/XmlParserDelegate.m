@@ -44,7 +44,7 @@
         [_currentElement addAssociation:a];
     } else if ([elementName isEqualToString:@"TestPlan"]) {
         // Allocate room for Test Sequences
-        [_mProject setTestSequences:[NSMutableArray init]];
+        [_mProject setTestSequences:[[NSMutableArray alloc] init]];
     } else if ([elementName isEqualToString:@"TestSequence"]) {
         // Create a sequence and add it to the project
         _currentTestSequence = [[TestSequence alloc] initWithDict:attributeDict];
@@ -52,8 +52,14 @@
         _topElement = _currentTestSequence;
     } else if ([elementName isEqualToString:@"TestDefinition"]) {
         // Create a Test Definition and add it to the current sequence
-        _currentTestDefinition = [[_currentTestDefinition alloc] initWithDict:attributeDict];
-        [_currentTestDefinition addTestSequence:_currentTestSequence];
+        _currentTestDefinition = [[TestDefinition alloc] initWithDict:attributeDict];
+        [_currentTestSequence addTestDefinition:_currentTestDefinition];
+        _currentElement = _currentTestDefinition;
+        _topElement = _currentTestSequence;
+    } else if ([elementName isEqualToString:@"Script"]) {
+        // Create a Script and add it to the current test definition
+        _currentScript = [[Script alloc] initWithDict:attributeDict];
+        [_currentTestDefinition setScript:_currentScript];
         _topElement = _currentTestSequence;
     }
 }
@@ -88,6 +94,8 @@
         [_topElement setMDescription:_mstrXMLString];
     } else if ([_mCurrentElementName isEqualToString:@"Project"]) {
         [_mProject setMDescription:_mstrXMLString];
+    } else if ([_mCurrentElementName isEqualToString:@"Script"]) {
+        _topElement = _currentTestDefinition;
     } else if ([_mCurrentElementName isEqualToString:@"ExternalID"]) {
         [_currentRequirement setExternalId:_mstrXMLString];
     } else if ([_mCurrentElementName isEqualToString:@"ManualStatus"]) {
@@ -100,9 +108,22 @@
         [_currentRequirement setVerificationMethod:_mstrXMLString];
     }else if ([_mCurrentElementName isEqualToString:@"ProjectID"]) {
         [_currentRequirement setMProjectId:[_mstrXMLString intValue]];
-    }
-    else {
-        NSLog(@"%@", elementName);
+    } else if ([_mCurrentElementName isEqualToString:@"Arguments"]) {
+        [_currentScript setArguments:_mstrXMLString];
+    } else if ([_mCurrentElementName isEqualToString:@"ParamFile"]) {
+        [_currentScript setParamFile:_mstrXMLString];
+    } else if ([_mCurrentElementName isEqualToString:@"Globalfile"]) {
+        [_currentScript setGlobalFile:_mstrXMLString];
+    } else if ([_mCurrentElementName isEqualToString:@"ScriptRelPath"]) {
+        [_currentScript setScriptRelPath:_mstrXMLString];
+    } else if ([_mCurrentElementName isEqualToString:@"ScriptCMLoc"]) {
+        [_currentScript setScriptCMLoc:_mstrXMLString];
+    } else if ([_mCurrentElementName isEqualToString:@"BaseCMLoc"]) {
+        [_currentScript setBaseCMLoc:_mstrXMLString];
+    } else if ([_mCurrentElementName isEqualToString:@"PythonPath"]) {
+        [_currentScript setPythonPath:_mstrXMLString];
+    } else {
+        NSLog(@"close--->%@", elementName);
     }
     _mstrXMLString = nil;
 }
