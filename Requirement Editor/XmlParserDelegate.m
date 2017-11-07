@@ -22,6 +22,7 @@
     
     if ([elementName isEqualToString:@"Project"]){
         _project = [[Project alloc] initWithDict:attributeDict];
+        _topElement = _project;
     } else if ([elementName isEqualToString:@"Requirements"]) {
         //marrXMLData = [[NSMutableArray alloc] init];
         
@@ -79,21 +80,20 @@
 {
     //NSLog(@"%@", elementName);
     if ([elementName isEqualToString:@"Requirement"]) {
-        NSLog(@"%@",_currentElement);
+        //NSLog(@"%@",_currentElement);
         NSMutableArray *associations = [_currentElement getAssociations];
         unsigned long numAssociations = [associations count];
         for (int i=0; i<numAssociations; i++) {
-            NSLog(@"%@", associations[i] );
+           // NSLog(@"%@", associations[i] );
         }
         
-        NSLog(@"Close requirement %@",_currentElement.mName);
+       // NSLog(@"Close requirement %@",_currentElement.mName);
         _mCurrentElementName = nil;
         _topElement = nil;
         _currentElement = nil;
     } else if ([_mCurrentElementName isEqualToString:@"Description"]) {
-        [_topElement setMDescription:_mstrXMLString];
-    } else if ([_mCurrentElementName isEqualToString:@"Project"]) {
-        [_project setMDescription:_mstrXMLString];
+        NSLog(@"setting description for %@", _project.mName);
+        [_topElement setMDescription:[[NSString alloc] initWithFormat:@"%@",_mstrXMLString]];
     } else if ([_mCurrentElementName isEqualToString:@"Script"]) {
         _topElement = _currentTestDefinition;
     } else if ([_mCurrentElementName isEqualToString:@"ExternalID"]) {

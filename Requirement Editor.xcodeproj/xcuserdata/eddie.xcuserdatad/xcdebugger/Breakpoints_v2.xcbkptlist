@@ -6,49 +6,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Requirement Editor/Association.h"
-            timestampString = "530656986.3606"
+            filePath = "Requirement Editor/XmlParserDelegate.m"
+            timestampString = "531784660.9378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "mName"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[Association mName]"
-                  moduleName = "Requirement Editor"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eddie/Documents/xcode/Requirement%20Editor/Requirement%20Editor/Association.h"
-                  timestampString = "531773391.743349"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "17"
-                  endingLineNumber = "17"
-                  offsetFromSymbolStart = "12">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[Association setMName:]"
-                  moduleName = "Requirement Editor"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eddie/Documents/xcode/Requirement%20Editor/Requirement%20Editor/Association.h"
-                  timestampString = "531773391.745256"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "17"
-                  endingLineNumber = "17"
-                  offsetFromSymbolStart = "49">
-               </Location>
-            </Locations>
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "-parser:didEndElement:namespaceURI:qualifiedName:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
