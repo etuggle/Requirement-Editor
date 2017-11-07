@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "XmlParserDelegate.h"
 
 @implementation ViewController
 
@@ -45,16 +44,41 @@
             //NSXMLParser *xmlparser = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:filePath]];
             NSXMLParser *xmlparser = [[NSXMLParser alloc] initWithContentsOfURL:theDoc];
             
-            XmlParserDelegate *parserDelegate = [[XmlParserDelegate alloc] init];
-            [xmlparser setDelegate:parserDelegate];
+            _parserDelegate = [[XmlParserDelegate alloc] init];
+            [xmlparser setDelegate:_parserDelegate];
             [xmlparser parse];
-            //NSError * e = [xmlparser parserError];
-            //NSLog(@"Error String: %@", e.localizedDescription);
-            //NSLog(@"Count: %lu", marrXMLData.count);
-            //NSLog(@"Data: %@", marrXMLData);
             
         }
         
     }];
+}
+
+- (IBAction) saveDocument:() sender {
+    NSLog(@"save document");
+    // create the save panel
+    NSSavePanel *panel = [NSSavePanel savePanel];
+    NSLog(@"blah");
+    // This method displays the panel and returns immediately.
+    // The completion handler is called when the user selects an
+    // item or cancels the panel.
+    // This method displays the panel and returns immediately.
+    // The completion handler is called when the user selects an
+    // item or cancels the panel.
+    [panel beginWithCompletionHandler:^(NSInteger result) {
+        if (result == NSFileHandlingPanelOKButton) {
+            
+            NSURL*  theDoc = [panel URL];
+            NSString * filePath = [theDoc path];
+            
+            [_FileLabel setStringValue:(filePath)];
+            // Open  the file and save the XML to the file.
+           
+            NSLog(@"open file: %@", [theDoc path]);
+            
+            //Project *projectToSave = [_parserDelegate getProject];
+            
+        }
+    }];
+    
 }
 @end

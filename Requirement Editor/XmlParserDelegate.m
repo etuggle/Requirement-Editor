@@ -21,7 +21,7 @@
     _mCurrentElementName = elementName;
     
     if ([elementName isEqualToString:@"Project"]){
-        _mProject = [[Project alloc] initWithDict:attributeDict];
+        _project = [[Project alloc] initWithDict:attributeDict];
     } else if ([elementName isEqualToString:@"Requirements"]) {
         //marrXMLData = [[NSMutableArray alloc] init];
         
@@ -29,7 +29,7 @@
         [_currentElement setMAssociations:[[NSMutableArray alloc] init]];
     } else if ([elementName isEqualToString:@"Requirement"]) {
         _currentRequirement = [[Requirement alloc] initWithDict:attributeDict];
-        [_mProject addRequirement:_currentRequirement];
+        [_project addRequirement:_currentRequirement];
         _currentElement = _currentRequirement;
         _topElement = _currentRequirement;
     } else if([elementName isEqualToString:@"Association"]) {
@@ -44,11 +44,11 @@
         [_currentElement addAssociation:a];
     } else if ([elementName isEqualToString:@"TestPlan"]) {
         // Allocate room for Test Sequences
-        [_mProject setTestSequences:[[NSMutableArray alloc] init]];
+        [_project setTestSequences:[[NSMutableArray alloc] init]];
     } else if ([elementName isEqualToString:@"TestSequence"]) {
         // Create a sequence and add it to the project
         _currentTestSequence = [[TestSequence alloc] initWithDict:attributeDict];
-        [_mProject addTestSequence:_currentTestSequence];
+        [_project addTestSequence:_currentTestSequence];
         _topElement = _currentTestSequence;
     } else if ([elementName isEqualToString:@"TestDefinition"]) {
         // Create a Test Definition and add it to the current sequence
@@ -93,7 +93,7 @@
     } else if ([_mCurrentElementName isEqualToString:@"Description"]) {
         [_topElement setMDescription:_mstrXMLString];
     } else if ([_mCurrentElementName isEqualToString:@"Project"]) {
-        [_mProject setMDescription:_mstrXMLString];
+        [_project setMDescription:_mstrXMLString];
     } else if ([_mCurrentElementName isEqualToString:@"Script"]) {
         _topElement = _currentTestDefinition;
     } else if ([_mCurrentElementName isEqualToString:@"ExternalID"]) {

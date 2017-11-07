@@ -7,10 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "XmlParserDelegate.h"
 
 @interface ViewController : NSViewController
 @property (weak) IBOutlet NSTextField *project;
 @property (weak) IBOutlet NSTextField *FileLabel;
- 
+@property (atomic, strong) XmlParserDelegate * parserDelegate;
 @end
 
