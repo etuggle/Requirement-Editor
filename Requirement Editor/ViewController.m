@@ -93,7 +93,17 @@
             dict[@"version"] = @"0.3";
             [root setAttributesWithDictionary:dict];
             NSXMLDocument *xmlDoc;
+            
             xmlDoc = [[NSXMLDocument alloc] initWithRootElement:root];
+            [xmlDoc setVersion:@"1.0"];
+            //[xmlDoc setDTD:(NSXMLDTD * _Nullable)]
+            [xmlDoc setMIMEType:@"text/xsl"];
+            [xmlDoc setURI:@"atProjectReport.xsl"];
+            [xmlDoc setStandalone:YES];
+            [xmlDoc setCharacterEncoding:@"UTF-8"];
+            NSXMLDTDNode * dtdNode = [[NSXMLDTDNode alloc] initWithXMLString:@"<?xml-stylesheet type=\"text/xsl\" href=\"atProjectReport.xsl\"?>"];
+            
+            [xmlDoc addChild:dtdNode];
             
             // Add the project if one exists
             if (projectToSave) {
