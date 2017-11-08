@@ -87,8 +87,6 @@
         _currentElement = nil;
     } else if ([_mCurrentElementName isEqualToString:@"Description"]) {
         [_topElement setMDescription:[[NSString alloc] initWithFormat:@"%@",_mstrXMLString]];
-        NSLog(@"Description for '%@': %@", _topElement.mName, _topElement.mDescription );
-
     } else if ([_mCurrentElementName isEqualToString:@"Script"]) {
         _topElement = _currentTestDefinition;
     } else if ([_mCurrentElementName isEqualToString:@"ExternalID"]) {
@@ -118,7 +116,7 @@
     } else if ([_mCurrentElementName isEqualToString:@"PythonPath"]) {
         [_currentScript setPythonPath:_mstrXMLString];
     } else if ([elementName isEqualToString:@"TestDefinition"]) {
-        NSLog(@"%@", _currentTestDefinition);
+        //NSLog(@"%@", _currentTestDefinition);
     } else {
         //NSLog(@"close--->%@", elementName);
     }

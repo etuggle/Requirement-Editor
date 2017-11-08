@@ -65,7 +65,7 @@
     NSLog(@"save document");
     // create the save panel
     NSSavePanel *panel = [NSSavePanel savePanel];
-    NSLog(@"blah");
+
     // This method displays the panel and returns immediately.
     // The completion handler is called when the user selects an
     // item or cancels the panel.
@@ -80,12 +80,9 @@
             
             [_FileLabel setStringValue:(filePath)];
             // Open  the file and save the XML to the file.
-           
-            NSLog(@"open file: %@", [theDoc path]);
             
             Project * projectToSave = _parserDelegate.project;
            
-            
             // Create the top level element
             NSXMLElement *root = (NSXMLElement *)[NSXMLNode elementWithName:@"TestExec"];
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
@@ -131,7 +128,6 @@
                 for (int i=0; i<[projectToSave.testSequences count]; i++) {
                     TestSequence *ts = projectToSave.testSequences[i];
                     NSXMLElement *sequenceElement = [self createElement:ts :@"TestSequence"];
-                    NSLog(@"num test defs: %lu", (unsigned long)[ts.testDefinitions count]);
                     for (int j=0; j< [ts.testDefinitions count]; j++) {
                         [sequenceElement addChild:[self createTestDefinitionElement:ts.testDefinitions[j]]];
                     }
@@ -142,18 +138,11 @@
             
             NSData *xmlData = [xmlDoc XMLDataWithOptions:NSXMLNodePrettyPrint];
             
-            NSLog(@"writing xml doc");
             if (![xmlData writeToFile:filePath atomically:YES]) {
                 NSBeep();
                 NSLog(@"Could not write document out...");
                 //return NO;
             }
-            
-            NSLog(@"done writing xml doc");
-
-            
-            NSLog(@"%@", xmlDoc.name);
-            
         }
     }];
     
