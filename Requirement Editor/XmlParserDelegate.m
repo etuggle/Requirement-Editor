@@ -56,7 +56,7 @@
         _currentTestDefinition = [[TestDefinition alloc] initWithDict:attributeDict];
         [_currentTestSequence addTestDefinition:_currentTestDefinition];
         _currentElement = _currentTestDefinition;
-        _topElement = _currentTestSequence;
+        _topElement = _currentTestDefinition;
     } else if ([elementName isEqualToString:@"Script"]) {
         // Create a Script and add it to the current test definition
         _currentScript = [[Script alloc] initWithDict:attributeDict];
@@ -80,19 +80,10 @@
 {
     //NSLog(@"%@", elementName);
     if ([elementName isEqualToString:@"Requirement"]) {
-        //NSLog(@"%@",_currentElement);
-        NSMutableArray *associations = [_currentElement getAssociations];
-        unsigned long numAssociations = [associations count];
-        for (int i=0; i<numAssociations; i++) {
-           // NSLog(@"%@", associations[i] );
-        }
-        
-       // NSLog(@"Close requirement %@",_currentElement.mName);
         _mCurrentElementName = nil;
         _topElement = nil;
         _currentElement = nil;
     } else if ([_mCurrentElementName isEqualToString:@"Description"]) {
-        NSLog(@"setting description for %@", _project.mName);
         [_topElement setMDescription:[[NSString alloc] initWithFormat:@"%@",_mstrXMLString]];
     } else if ([_mCurrentElementName isEqualToString:@"Script"]) {
         _topElement = _currentTestDefinition;
@@ -122,8 +113,10 @@
         [_currentScript setBaseCMLoc:_mstrXMLString];
     } else if ([_mCurrentElementName isEqualToString:@"PythonPath"]) {
         [_currentScript setPythonPath:_mstrXMLString];
+    } else if ([elementName isEqualToString:@"TestDefinition"]) {
+        NSLog(@"%@", _currentTestDefinition);
     } else {
-        NSLog(@"close--->%@", elementName);
+        //NSLog(@"close--->%@", elementName);
     }
     _mstrXMLString = nil;
 }

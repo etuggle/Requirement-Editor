@@ -125,8 +125,20 @@
                     [requirements addChild:[self createRequirementElement:projectToSave.requirements[i]]];
                 }
                 [projectElement addChild:requirements];
+                
+                // A project must have a test plan section.  This section defines the actual tests
+                NSXMLElement *testPlan = [self createSimpleElement:@"TestPlan" :@""];
+                for (int i=0; i<[projectToSave.testSequences count]; i++) {
+                    TestSequence *ts = projectToSave.testSequences[i];
+                    NSXMLElement *sequenceElement = [self createElement:ts :@"TestSequence"];
+                    for (int j=0; j< [ts.testDefinitions count]; j++) {
+                        [sequenceElement addChild:[self createTestDefinitionElement:ts.testDefinitions[j]]];
+                    }
+                    [testPlan addChild:sequenceElement];
+                }
+                [projectElement addChild:testPlan];
             }
-                        
+            
             NSData *xmlData = [xmlDoc XMLDataWithOptions:NSXMLNodePrettyPrint];
             
             NSLog(@"writing xml doc");
@@ -146,25 +158,33 @@
     
 }
 
-- (NSXMLElement *) createRequirementElement:(Requirement *)req {
+- (NSXMLElement *) createElement:(TestExecElement *)teElement :(NSString *)elementName {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     
-    NSXMLElement *requirementElement = (NSXMLElement *)[NSXMLNode elementWithName:@"Requirement"];
+    NSXMLElement *element = (NSXMLElement *)[NSXMLNode elementWithName:elementName];
     dict = [[NSMutableDictionary alloc] init];
-    dict[@"status"] = req.mStatus;
-    dict[@"dbid"] = [[NSString alloc]initWithFormat:@"%d", req.mDbid];
-    dict[@"name"] = req.mName;
-    dict[@"uid"] = [[NSString alloc]initWithFormat:@"%d", req.mUid];
-    [requirementElement setAttributesWithDictionary:dict];
+    dict[@"dbid"] = [[NSString alloc]initWithFormat:@"%d", teElement.mDbid];
+    dict[@"name"] = teElement.mName;
+    dict[@"uid"] = [[NSString alloc]initWithFormat:@"%d", teElement.mUid];
+    [element setAttributesWithDictionary:dict];
+    
     // Each requirement should have a description
     NSXMLElement *desc = (NSXMLElement *)[NSXMLNode elementWithName:@"Description"];
     
     NSString *str = @"Please enter a description for this requirement.  This should be the requirement text.";
-    if (req.mDescription) {
-        str = req.mDescription;
+    if (teElement.mDescription) {
+        str = teElement.mDescription;
     }
     [desc setStringValue:str];
-    [requirementElement addChild:desc];
+    [element addChild:desc];
+    
+    return element;
+}
+
+- (NSXMLElement *) createRequirementElement:(Requirement *)req {
+    
+    NSXMLElement *requirementElement = [self createElement:req :@"Requirement"];
+    [requirementElement addAttribute:[NSXMLNode attributeWithName:@"status" stringValue:req.mStatus]];
     
     // Process the coverage for this requirement
     NSXMLElement *coverage = (NSXMLElement *)[NSXMLNode elementWithName:@"Coverage"];
@@ -182,7 +202,38 @@
 
     return requirementElement;
 }
+- (NSXMLElement *) createTestDefinitionElement:(TestDefinition *)testDef {
+    
+    NSXMLElement *testDefElement = [self createElement:testDef :@"TestSequence"];
+    [testDefElement addAttribute:[NSXMLNode attributeWithName:@"status" stringValue:testDef.mStatus]];
 
+    [testDefElement addChild:[self createScript:testDef.script]];
+    
+    // Process the coverage for this requirement
+    NSXMLElement *coverage = (NSXMLElement *)[NSXMLNode elementWithName:@"Covers"];
+    for (int coverageIdx=0; coverageIdx<[testDef.mAssociations count]; coverageIdx++) {
+        Association *a = testDef.mAssociations[coverageIdx];
+        [coverage addChild:[self createAssociationElement:a]];
+    }
+    [testDefElement addChild:coverage];
+    [testDefElement addChild:[self createSimpleElement:@"TestSteps" :@""]];
+    [testDefElement addChild:[self createSimpleElement:@"Attachments" :@""]];
+   
+    return testDefElement;
+}
+
+- (NSXMLElement *) createScript:(Script *) script {
+    NSXMLElement *scriptElement = [self createElement:script :@"Script"];
+    [scriptElement addChild:[self createSimpleElement:@"Arguments" :script.arguments]];
+    [scriptElement addChild:[self createSimpleElement:@"ParamFile" :script.paramFile]];
+    [scriptElement addChild:[self createSimpleElement:@"GlobalFile" :script.globalFile]];
+    [scriptElement addChild:[self createSimpleElement:@"ScriptRelPath" :script.scriptRelPath]];
+    [scriptElement addChild:[self createSimpleElement:@"ScriptCMLoc" :script.scriptCMLoc]];
+    [scriptElement addChild:[self createSimpleElement:@"BaseCMLoc" :script.baseCMLoc]];
+    [scriptElement addChild:[self createSimpleElement:@"PythonPath" :script.pythonPath]];
+
+    return scriptElement;
+}
 - (NSXMLElement *) createAssociationElement:(Association *)assoc {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
 
