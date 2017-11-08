@@ -61,7 +61,7 @@
         // Create a Script and add it to the current test definition
         _currentScript = [[Script alloc] initWithDict:attributeDict];
         [_currentTestDefinition setScript:_currentScript];
-        _topElement = _currentTestSequence;
+        _topElement = _currentScript;
     }
 }
 
@@ -85,6 +85,8 @@
         _currentElement = nil;
     } else if ([_mCurrentElementName isEqualToString:@"Description"]) {
         [_topElement setMDescription:[[NSString alloc] initWithFormat:@"%@",_mstrXMLString]];
+        NSLog(@"Description for '%@': %@", _topElement.mName, _topElement.mDescription );
+
     } else if ([_mCurrentElementName isEqualToString:@"Script"]) {
         _topElement = _currentTestDefinition;
     } else if ([_mCurrentElementName isEqualToString:@"ExternalID"]) {
