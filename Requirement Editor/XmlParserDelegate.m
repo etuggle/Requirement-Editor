@@ -28,6 +28,8 @@
         
     } else if ([elementName isEqualToString:@"Coverage"]) {
         [_currentElement setMAssociations:[[NSMutableArray alloc] init]];
+    } else if ([elementName isEqualToString:@"Covers"]) {
+            [_currentElement setMAssociations:[[NSMutableArray alloc] init]];
     } else if ([elementName isEqualToString:@"Requirement"]) {
         _currentRequirement = [[Requirement alloc] initWithDict:attributeDict];
         [_project addRequirement:_currentRequirement];

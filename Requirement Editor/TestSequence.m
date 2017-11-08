@@ -12,10 +12,12 @@
 - (instancetype)initWithDict:(NSDictionary *)dict
 {
     self = [super initWithDict:dict];
+    _testDefinitions = [[NSMutableArray alloc] init];
     return self;
 }
 - (NSString *)description {
     return [NSString stringWithFormat: @"<TestSequence dbid=\"%d\" Name=\"%@\" uid=\"%d\">\n    <Description>%@</Description>", _mDbid, _mName, _mUid, _mDescription];
+    
 }
 - (void) addTestDefinition:(TestDefinition *)testDef {
     [_testDefinitions addObject:testDef];

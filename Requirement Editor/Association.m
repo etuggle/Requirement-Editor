@@ -17,7 +17,7 @@
     _mName = dict[@"name"];
     _mUid = [dict[@"uid"] intValue];
     _mStatus = dict[@"status"];
-    _mType = dict[@"type"];
+    _mExternalId = dict[@"ExternalID"];
     return self;
 }
 

@@ -14,6 +14,7 @@
 {
     self = [super initWithDict:dict];
     _mStatus = dict[@"status"];
+    _mAssociations = [[NSMutableArray alloc] init];
     return self;
 }
 - (NSMutableArray *) getAssociations {

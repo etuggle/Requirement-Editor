@@ -127,10 +127,11 @@
                 [projectElement addChild:requirements];
                 
                 // A project must have a test plan section.  This section defines the actual tests
-                NSXMLElement *testPlan = [self createSimpleElement:@"TestPlan" :@""];
+                NSXMLElement *testPlan = (NSXMLElement *)[NSXMLNode elementWithName:@"TestPlan"];
                 for (int i=0; i<[projectToSave.testSequences count]; i++) {
                     TestSequence *ts = projectToSave.testSequences[i];
                     NSXMLElement *sequenceElement = [self createElement:ts :@"TestSequence"];
+                    NSLog(@"num test defs: %lu", (unsigned long)[ts.testDefinitions count]);
                     for (int j=0; j< [ts.testDefinitions count]; j++) {
                         [sequenceElement addChild:[self createTestDefinitionElement:ts.testDefinitions[j]]];
                     }
@@ -204,7 +205,7 @@
 }
 - (NSXMLElement *) createTestDefinitionElement:(TestDefinition *)testDef {
     
-    NSXMLElement *testDefElement = [self createElement:testDef :@"TestSequence"];
+    NSXMLElement *testDefElement = [self createElement:testDef :@"TestDefinition"];
     [testDefElement addAttribute:[NSXMLNode attributeWithName:@"status" stringValue:testDef.mStatus]];
 
     [testDefElement addChild:[self createScript:testDef.script]];
@@ -242,6 +243,8 @@
     dict[@"status"] = assoc.mStatus;
     dict[@"type"] =  assoc.mType;
     dict[@"name"] = assoc.mName;
+    dict[@"ExternalID"] = assoc.mExternalId;
+    
     dict[@"uid"] = [[NSString alloc]initWithFormat:@"%d", assoc.mUid];
     [associationElement setAttributesWithDictionary:dict];
     
