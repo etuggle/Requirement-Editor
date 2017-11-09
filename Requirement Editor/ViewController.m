@@ -101,9 +101,13 @@
             [xmlDoc setURI:@"atProjectReport.xsl"];
             [xmlDoc setStandalone:YES];
             [xmlDoc setCharacterEncoding:@"UTF-8"];
-            NSXMLDTDNode * dtdNode = [[NSXMLDTDNode alloc] initWithXMLString:@"<?xml-stylesheet type=\"text/xsl\" href=\"atProjectReport.xsl\"?>"];
-            
-            [xmlDoc addChild:dtdNode];
+            //[xmlDoc setValue:@"text/xsl" forKey:@"type"];
+            //NSXMLDTDNode * dtdNode = [[NSXMLDTDNode alloc] initWithXMLString:@"<?xml-stylesheet type=\"text/xsl\" href=\"atProjectReport.xsl\"?>"];
+            //[dtdNode setPublicID:@"public id"];
+            //[dtdNode setValue:@"blahblah" forKey:@"href"];
+            //[dtdNode setValue:@"text/xsl" forKey:@"type"];
+
+            //[xmlDoc addChild:dtdNode];
             
             // Add the project if one exists
             if (projectToSave) {
