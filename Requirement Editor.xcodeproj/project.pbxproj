@@ -14,6 +14,7 @@
 		2C256CB61F990320004F8E5B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C256CB51F990320004F8E5B /* main.m */; };
 		2C256CC11F990320004F8E5B /* Requirement_EditorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C256CC01F990320004F8E5B /* Requirement_EditorTests.m */; };
 		2C256CCC1F990320004F8E5B /* Requirement_EditorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C256CCB1F990320004F8E5B /* Requirement_EditorUITests.m */; };
+		2C45EDBD1FB510BB00B7C459 /* RequirementsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C45EDBC1FB510BB00B7C459 /* RequirementsDataSource.m */; };
 		2CA6F27B1FA24DD700BE177B /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6F27A1FA24DD700BE177B /* Project.m */; };
 		2CA6F27E1FA2559F00BE177B /* AssociatedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6F27D1FA2559F00BE177B /* AssociatedElement.m */; };
 		2CA6F2811FA2670C00BE177B /* TestSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6F2801FA2670C00BE177B /* TestSequence.m */; };
@@ -59,6 +60,8 @@
 		2C256CC71F990320004F8E5B /* Requirement EditorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Requirement EditorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C256CCB1F990320004F8E5B /* Requirement_EditorUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Requirement_EditorUITests.m; sourceTree = "<group>"; };
 		2C256CCD1F990320004F8E5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C45EDBB1FB510BB00B7C459 /* RequirementsDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequirementsDataSource.h; sourceTree = "<group>"; };
+		2C45EDBC1FB510BB00B7C459 /* RequirementsDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequirementsDataSource.m; sourceTree = "<group>"; };
 		2CA6F2791FA24DD700BE177B /* Project.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
 		2CA6F27A1FA24DD700BE177B /* Project.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 		2CA6F27C1FA2559F00BE177B /* AssociatedElement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssociatedElement.h; sourceTree = "<group>"; };
@@ -133,6 +136,8 @@
 				2C256CAA1F990320004F8E5B /* AppDelegate.m */,
 				2C256CAC1F990320004F8E5B /* ViewController.h */,
 				2C256CAD1F990320004F8E5B /* ViewController.m */,
+				2C45EDBB1FB510BB00B7C459 /* RequirementsDataSource.h */,
+				2C45EDBC1FB510BB00B7C459 /* RequirementsDataSource.m */,
 				2C256CAF1F990320004F8E5B /* Assets.xcassets */,
 				2C256CB11F990320004F8E5B /* Main.storyboard */,
 				2CA6F27C1FA2559F00BE177B /* AssociatedElement.h */,
@@ -322,6 +327,7 @@
 				2CC0CC6B1FA0F787001737F5 /* Association.m in Sources */,
 				2CA6F2841FA2671C00BE177B /* Script.m in Sources */,
 				2CC0CC6E1FA12637001737F5 /* TestExecElement.m in Sources */,
+				2C45EDBD1FB510BB00B7C459 /* RequirementsDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
