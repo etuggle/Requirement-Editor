@@ -12,8 +12,7 @@
 
 
 @interface RequirementsDataSource : NSObject  < NSTableViewDataSource >
-@property (nonatomic, strong) NSMutableArray *numbers;
-@property (nonatomic, strong) NSMutableArray *numberCodes;
+
 @property (nonatomic, strong) Project *project;
 @property (nonatomic, strong) NSMutableArray *requirements;
 @end

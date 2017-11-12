@@ -13,6 +13,7 @@
 @interface ViewController : NSViewController
 @property (weak) IBOutlet NSTextField *project;
 @property (weak) IBOutlet NSTextField *FileLabel;
+@property (weak) IBOutlet NSTableView *reqViewCtrl;
 
 @property (atomic, strong) XmlParserDelegate * parserDelegate;
 @property (atomic, strong) RequirementsDataSource *reqDS;

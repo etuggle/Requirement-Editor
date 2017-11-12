@@ -59,8 +59,9 @@
             NSMutableArray *requirements = currentProject.requirements;
             
             _reqDS = [[RequirementsDataSource alloc] init];
-            
+           
             [_reqDS setRequirements:requirements];
+             [_reqViewCtrl setDataSource:_reqDS];
         }
         
     }];

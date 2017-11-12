@@ -832,7 +832,7 @@
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="pHD-7Y-kTI">
-                                                        <font key="font" metaFont="system"/>
+                                                        <font key="font" size="13" name="CourierNewPSMT"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
@@ -876,6 +876,7 @@
                     <connections>
                         <outlet property="FileLabel" destination="sH7-aa-9oy" id="CBk-hv-crY"/>
                         <outlet property="project" destination="88C-IA-OzK" id="xN6-vW-n7t"/>
+                        <outlet property="reqViewCtrl" destination="uzL-4k-V0I" id="fox-pH-Uoo"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
