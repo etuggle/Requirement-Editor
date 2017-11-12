@@ -15,7 +15,7 @@
 #import "TestDefinition.h"
 
 @interface XmlParserDelegate : NSObject <NSXMLParserDelegate>
-@property (nonatomic, strong) Project *project;
+@property  Project *project;
 
 @property (nonatomic,strong) NSMutableArray *marrXMLData;
 @property (nonatomic,strong) NSMutableString *mstrXMLString;

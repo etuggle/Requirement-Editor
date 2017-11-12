@@ -7,9 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "Requirement.h"
+#import "Project.h"
+
 
 @interface RequirementsDataSource : NSObject  < NSTableViewDataSource >
 @property (nonatomic, strong) NSMutableArray *numbers;
 @property (nonatomic, strong) NSMutableArray *numberCodes;
-
+@property (nonatomic, strong) Project *project;
+@property (nonatomic, strong) NSMutableArray *requirements;
 @end

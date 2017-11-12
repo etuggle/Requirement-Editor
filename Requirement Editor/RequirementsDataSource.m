@@ -20,23 +20,29 @@
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
     
     // how many rows do we have here?
-    return self.numbers.count;
+    return self.requirements.count;
 }
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     
     // populate each row of our table view with data
     // display a different value depending on each column (as identified in XIB)
+    //NSLog(tableColumn.identifier);
     
-    if ([tableColumn.identifier isEqualToString:@"numbers"]) {
-        
+    if ([tableColumn.identifier isEqualToString:@"ID"]) {
+        //NSLog(@"found ID column for row %d", row);
         // first colum (numbers)
-        return [self.numbers objectAtIndex:row];
+       
+        Requirement *r = [_requirements objectAtIndex:row];
+        NSString *reqId = r.externalId;
+        return reqId;
         
     } else {
         
         // second column (numberCodes)
+        NSLog(@"return: %@", [_numberCodes objectAtIndex:row]);
         return [self.numberCodes objectAtIndex:row];
     }
 }
+
 @end

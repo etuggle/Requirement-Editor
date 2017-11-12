@@ -8,12 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 #import "XmlParserDelegate.h"
+#import "RequirementsDataSource.h"
 
 @interface ViewController : NSViewController
 @property (weak) IBOutlet NSTextField *project;
 @property (weak) IBOutlet NSTextField *FileLabel;
-@property (weak) IBOutlet NSTableView *tableViewOutlet;
 
 @property (atomic, strong) XmlParserDelegate * parserDelegate;
+@property (atomic, strong) RequirementsDataSource *reqDS;
 @end
 
