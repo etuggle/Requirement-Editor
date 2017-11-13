@@ -14,7 +14,7 @@
   
     return self;
 }
-
+ 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
     
     // how many rows do we have here?
@@ -32,9 +32,51 @@
         //NSLog(@"found ID column for row %d", row);
         // first colum (numbers)
        
-        
         NSString *reqId = r.externalId;
         return reqId;
+        
+    } else if ([tableColumn.identifier isEqualToString:@"Name"]) {
+        //NSLog(@"found ID column for row %d", row);
+        // first colum (numbers)
+        
+        NSString *reqId = r.mName;
+        return reqId;
+        
+    } else if ([tableColumn.identifier isEqualToString:@"Description"]) {
+        //NSLog(@"found ID column for row %d", row);
+        // first colum (numbers)
+        
+        NSString *reqId = r.mDescription;
+        return reqId;
+        
+    }  else if ([tableColumn.identifier isEqualToString:@"Manual"]) {
+        //NSLog(@"found ID column for row %d", row);
+        // first colum (numbers)
+        
+        NSString *reqId = r.manualStatus;
+        if ([reqId isEqualToString:@"X"]) {
+            return [[NSString alloc] initWithFormat:@"%d",1];
+        }
+        else
+            return 0;
+        //return reqId;
+        
+    } else if ([tableColumn.identifier isEqualToString:@"Verification"]) {
+        //NSLog(@"found ID column for row %d", row);
+        // first colum (numbers)
+        
+        NSString *value = r.verificationMethod;
+        if ([[value uppercaseString] isEqualToString:@"DEMONSTRATION"]) {
+            return @"Demonstration";
+        } else if ([[value uppercaseString] isEqualToString:@"TEST"]) {
+            return @"Test";
+        } else if ([[value uppercaseString] isEqualToString:@"ANALYSIS"]) {
+            return @"Analysis";
+        } else if ([[value uppercaseString] isEqualToString:@"INSPECTION"]) {
+            return @"Inspection";
+        } else {
+            return @"Unknown";
+        }
         
     } else {
         
