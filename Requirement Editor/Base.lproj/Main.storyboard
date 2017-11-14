@@ -900,8 +900,8 @@
                                     <rect key="frame" x="1" y="292" width="901" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="KyH-Pv-Ouf">
-                                    <rect key="frame" x="-15" y="0.0" width="16" height="0.0"/>
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="KyH-Pv-Ouf">
+                                    <rect key="frame" x="-15" y="23" width="16" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="aZ8-5B-dbS">
@@ -913,6 +913,9 @@
                     </view>
                     <connections>
                         <outlet property="FileLabel" destination="sH7-aa-9oy" id="CBk-hv-crY"/>
+                        <outlet property="numRequirements" destination="K5j-nH-xFN" id="XtM-yN-WAh"/>
+                        <outlet property="numSequences" destination="5P9-jL-hy6" id="ogK-Oz-XSm"/>
+                        <outlet property="numTests" destination="f0h-mH-5U2" id="A99-te-E6P"/>
                         <outlet property="project" destination="88C-IA-OzK" id="xN6-vW-n7t"/>
                         <outlet property="reqViewCtrl" destination="uzL-4k-V0I" id="fox-pH-Uoo"/>
                     </connections>

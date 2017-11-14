@@ -57,11 +57,25 @@
             [xmlparser parse];
             Project * currentProject = _parserDelegate.project;
             NSMutableArray *requirements = currentProject.requirements;
+            NSMutableArray *sequences = currentProject.testSequences;
             
             _reqDS = [[RequirementsDataSource alloc] init];
            
             [_reqDS setRequirements:requirements];
              [_reqViewCtrl setDataSource:_reqDS];
+            _project.stringValue=currentProject.mName;
+            _numRequirements.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)[requirements count] ];
+            _numSequences.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)[sequences count] ];
+            
+            int numTestDefs = 0;
+            // Since each sequence may contain
+            for (int i=0; i<[sequences count]; i++) {
+                //numTestDefs = sequences[i]
+                TestSequence *currentSequence = [sequences objectAtIndex:i];
+                numTestDefs += [currentSequence.testDefinitions count];
+            }
+            _numTests.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)numTestDefs ];
+
         }
         
     }];
