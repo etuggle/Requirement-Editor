@@ -39,12 +39,7 @@
             
             
             NSURL*  theDoc = [[panel URLs] objectAtIndex:0];
-            
-            // temp
-            
-            // end temp
-            
-            
+   
             NSString * filePath = [theDoc path];
             
             [_FileLabel setStringValue:(filePath)];
@@ -60,9 +55,12 @@
             NSMutableArray *sequences = currentProject.testSequences;
             
             _reqDS = [[RequirementsDataSource alloc] init];
+            _reqDelegate = [[RequirementsViewDelegate alloc] init];
            
             [_reqDS setRequirements:requirements];
              [_reqViewCtrl setDataSource:_reqDS];
+            [_reqViewCtrl setDelegate:_reqDelegate];
+            
             _project.stringValue=currentProject.mName;
             _numRequirements.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)[requirements count] ];
             _numSequences.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)[sequences count] ];

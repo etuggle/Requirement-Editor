@@ -24,6 +24,7 @@
 		2CC0CC681FA0E308001737F5 /* Requirement.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0CC671FA0E308001737F5 /* Requirement.m */; };
 		2CC0CC6B1FA0F787001737F5 /* Association.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0CC6A1FA0F787001737F5 /* Association.m */; };
 		2CC0CC6E1FA12637001737F5 /* TestExecElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0CC6D1FA12637001737F5 /* TestExecElement.m */; };
+		2CC8D7C51FBBC6FD006F75D7 /* RequirementsViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8D7C41FBBC6FC006F75D7 /* RequirementsViewDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,8 @@
 		2CC0CC6A1FA0F787001737F5 /* Association.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Association.m; sourceTree = "<group>"; };
 		2CC0CC6C1FA12402001737F5 /* TestExecElement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestExecElement.h; sourceTree = "<group>"; };
 		2CC0CC6D1FA12637001737F5 /* TestExecElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestExecElement.m; sourceTree = "<group>"; };
+		2CC8D7C31FBBC6FC006F75D7 /* RequirementsViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequirementsViewDelegate.h; sourceTree = "<group>"; };
+		2CC8D7C41FBBC6FC006F75D7 /* RequirementsViewDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequirementsViewDelegate.m; sourceTree = "<group>"; };
 		2CF7ED341FB237C400825D09 /* Requirement Editor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Requirement Editor.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +141,8 @@
 				2C256CAD1F990320004F8E5B /* ViewController.m */,
 				2C45EDBB1FB510BB00B7C459 /* RequirementsDataSource.h */,
 				2C45EDBC1FB510BB00B7C459 /* RequirementsDataSource.m */,
+				2CC8D7C31FBBC6FC006F75D7 /* RequirementsViewDelegate.h */,
+				2CC8D7C41FBBC6FC006F75D7 /* RequirementsViewDelegate.m */,
 				2C256CAF1F990320004F8E5B /* Assets.xcassets */,
 				2C256CB11F990320004F8E5B /* Main.storyboard */,
 				2CA6F27C1FA2559F00BE177B /* AssociatedElement.h */,
@@ -322,6 +327,7 @@
 				2C256CB61F990320004F8E5B /* main.m in Sources */,
 				2CA6F2811FA2670C00BE177B /* TestSequence.m in Sources */,
 				2CA6F27B1FA24DD700BE177B /* Project.m in Sources */,
+				2CC8D7C51FBBC6FD006F75D7 /* RequirementsViewDelegate.m in Sources */,
 				2C256CAB1F990320004F8E5B /* AppDelegate.m in Sources */,
 				2CC0CC641FA0D0AA001737F5 /* XmlParserDelegate.m in Sources */,
 				2CC0CC6B1FA0F787001737F5 /* Association.m in Sources */,

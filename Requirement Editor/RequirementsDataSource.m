@@ -86,4 +86,10 @@
     }
 }
 
+
+- (void)tableView:(NSTableView *)tableView setObjectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+    NSLog(@"setting item in row %@, column %ld", tableColumn.identifier, (long)row);
+}
+
+
 @end
