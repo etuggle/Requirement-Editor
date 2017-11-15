@@ -87,8 +87,54 @@
 }
 
 
-- (void)tableView:(NSTableView *)tableView setObjectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    NSLog(@"setting item in row %@, column %ld", tableColumn.identifier, (long)row);
+- (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
+{
+    Requirement *r = [_requirements objectAtIndex:rowIndex];
+    
+    if ([aTableColumn.identifier isEqualToString:@"ID"]) {
+        [r setVerificationMethod:anObject];
+    } else if ([aTableColumn.identifier isEqualToString:@"Name"]) {
+        [r setMName:anObject];
+    } else if ([aTableColumn.identifier isEqualToString:@"Description"]) {
+        [r setMDescription:anObject];
+
+    }  else if ([aTableColumn.identifier isEqualToString:@"Manual"]) {
+        // first colum (numbers)
+        NSString *manualIndicator;
+        NSNumber *value = anObject;
+        
+        if ([value isEqual:@(YES)]) {
+            manualIndicator = @"X";
+        } else {
+            manualIndicator = @"";
+        }
+        [r setManualStatus:manualIndicator];
+        
+    } else if ([aTableColumn.identifier isEqualToString:@"Verification"]) {
+        //NSLog(@"found ID column for row %d", row);
+        // first colum (numbers)
+        
+        NSString *verMethodString = anObject;
+
+        if ([[verMethodString uppercaseString] isEqualToString:@"DEMONSTRATION"] ||
+            [[verMethodString uppercaseString] isEqualToString:@"TEST"] ||
+            [[verMethodString uppercaseString] isEqualToString:@"ANALYSIS"] ||
+            [[verMethodString uppercaseString] isEqualToString:@"INSPECTION"]) {
+            [r setVerificationMethod:verMethodString];
+        } else {
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert addButtonWithTitle:@"OK"];
+            [alert setMessageText:@"Invalid Verification Method Specified."];
+            [alert setInformativeText:@"Valid options are 'Demonstration', 'Test', Analysis', 'Inspection'"];
+            [alert setAlertStyle:NSAlertStyleWarning];
+           
+        }
+        
+    } else {
+        
+        
+    }
+    
 }
 
 

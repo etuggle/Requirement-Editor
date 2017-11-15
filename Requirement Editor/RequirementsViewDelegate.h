@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "RequirementsDataSource.h"
 @interface RequirementsViewDelegate : NSObject <NSTableViewDelegate>
 
 @end

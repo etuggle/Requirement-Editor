@@ -21,6 +21,10 @@
 - (void)tableViewSelectionDidChange:(NSNotification *)notification {
     
     //notification.
+    NSLog(@"received notification: %@", notification.name);
+    NSTableView *tView = notification.object;
+    RequirementsDataSource *ds = [tView dataSource];
+    
     
 }
 @end
