@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "RequirementsDataSource.h"
-@interface RequirementsViewDelegate : NSObject <NSTableViewDelegate>
 
+@interface RequirementsViewDelegate : NSObject <NSTableViewDelegate>
+@property (atomic, strong) NSMutableArray *requirements;
+@property (atomic) long selectedRow;
 @end

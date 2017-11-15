@@ -56,7 +56,7 @@
             
             _reqDS = [[RequirementsDataSource alloc] init];
             _reqDelegate = [[RequirementsViewDelegate alloc] init];
-           
+            
             [_reqDS setRequirements:requirements];
              [_reqViewCtrl setDataSource:_reqDS];
             [_reqViewCtrl setDelegate:_reqDelegate];
