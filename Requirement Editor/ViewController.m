@@ -56,13 +56,12 @@
             
             _reqDS = [[RequirementsDataSource alloc] init];
             _reqDelegate = [[RequirementsViewDelegate alloc] init];
-            _testSeqDS = [[TestSequencesDataSource alloc] init];
+            _testSeqDS = [[TestSequencesDataSource alloc] initWithSequences:sequences];
             
             [_reqDS setRequirements:requirements];
              [_reqViewCtrl setDataSource:_reqDS];
             [_reqViewCtrl setDelegate:_reqDelegate];
             [_seqViewControl setDataSource:_testSeqDS];
-            [_testSeqDS setSequences:sequences];
             
             _project.stringValue=currentProject.mName;
             _numRequirements.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)[requirements count] ];

@@ -12,8 +12,8 @@
 #import "TestDefinition.h"
 
 @interface TestSequencesDataSource : NSObject <NSOutlineViewDataSource>
-@property (atomic, strong) NSDictionary *firstParent;
-@property (atomic, strong) NSDictionary *secondParent;
-@property (atomic, strong) NSArray *list;
+-(instancetype)initWithSequences:(NSMutableArray *)seq NS_DESIGNATED_INITIALIZER;
+-(instancetype)init NS_UNAVAILABLE;
+
 @property (atomic, strong) NSMutableArray *sequences;
 @end
