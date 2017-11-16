@@ -10,6 +10,7 @@
 #import "XmlParserDelegate.h"
 #import "RequirementsDataSource.h"
 #import "RequirementsViewDelegate.h"
+#import "TestSequencesDataSource.h"
 
 @interface ViewController : NSViewController
 @property (weak) IBOutlet NSTextField *project;
@@ -18,9 +19,11 @@
 @property (weak) IBOutlet NSTextField *numRequirements;
 @property (weak) IBOutlet NSTextField *numSequences;
 @property (weak) IBOutlet NSTextField *numTests;
+@property (weak) IBOutlet NSOutlineView *seqViewControl;
 
 @property (atomic, strong) XmlParserDelegate * parserDelegate;
 @property (atomic, strong) RequirementsDataSource *reqDS;
 @property (atomic, strong) RequirementsViewDelegate *reqDelegate;
+@property (atomic, strong) TestSequencesDataSource *testSeqDS;
 @end
 

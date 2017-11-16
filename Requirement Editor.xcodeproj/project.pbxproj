@@ -15,6 +15,7 @@
 		2C256CC11F990320004F8E5B /* Requirement_EditorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C256CC01F990320004F8E5B /* Requirement_EditorTests.m */; };
 		2C256CCC1F990320004F8E5B /* Requirement_EditorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C256CCB1F990320004F8E5B /* Requirement_EditorUITests.m */; };
 		2C45EDBD1FB510BB00B7C459 /* RequirementsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C45EDBC1FB510BB00B7C459 /* RequirementsDataSource.m */; };
+		2C926C6F1FBDFFCA00A4B627 /* TestSequencesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C926C6E1FBDFFCA00A4B627 /* TestSequencesDataSource.m */; };
 		2CA6F27B1FA24DD700BE177B /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6F27A1FA24DD700BE177B /* Project.m */; };
 		2CA6F27E1FA2559F00BE177B /* AssociatedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6F27D1FA2559F00BE177B /* AssociatedElement.m */; };
 		2CA6F2811FA2670C00BE177B /* TestSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6F2801FA2670C00BE177B /* TestSequence.m */; };
@@ -63,6 +64,8 @@
 		2C256CCD1F990320004F8E5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C45EDBB1FB510BB00B7C459 /* RequirementsDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequirementsDataSource.h; sourceTree = "<group>"; };
 		2C45EDBC1FB510BB00B7C459 /* RequirementsDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequirementsDataSource.m; sourceTree = "<group>"; };
+		2C926C6D1FBDFFCA00A4B627 /* TestSequencesDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestSequencesDataSource.h; sourceTree = "<group>"; };
+		2C926C6E1FBDFFCA00A4B627 /* TestSequencesDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestSequencesDataSource.m; sourceTree = "<group>"; };
 		2CA6F2791FA24DD700BE177B /* Project.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
 		2CA6F27A1FA24DD700BE177B /* Project.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 		2CA6F27C1FA2559F00BE177B /* AssociatedElement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssociatedElement.h; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 				2CC8D7C41FBBC6FC006F75D7 /* RequirementsViewDelegate.m */,
 				2C256CAF1F990320004F8E5B /* Assets.xcassets */,
 				2C256CB11F990320004F8E5B /* Main.storyboard */,
+				2C926C6D1FBDFFCA00A4B627 /* TestSequencesDataSource.h */,
+				2C926C6E1FBDFFCA00A4B627 /* TestSequencesDataSource.m */,
 				2CA6F27C1FA2559F00BE177B /* AssociatedElement.h */,
 				2CA6F27D1FA2559F00BE177B /* AssociatedElement.m */,
 				2C256CB41F990320004F8E5B /* Info.plist */,
@@ -326,6 +331,7 @@
 				2CA6F27E1FA2559F00BE177B /* AssociatedElement.m in Sources */,
 				2C256CB61F990320004F8E5B /* main.m in Sources */,
 				2CA6F2811FA2670C00BE177B /* TestSequence.m in Sources */,
+				2C926C6F1FBDFFCA00A4B627 /* TestSequencesDataSource.m in Sources */,
 				2CA6F27B1FA24DD700BE177B /* Project.m in Sources */,
 				2CC8D7C51FBBC6FD006F75D7 /* RequirementsViewDelegate.m in Sources */,
 				2C256CAB1F990320004F8E5B /* AppDelegate.m in Sources */,

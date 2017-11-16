@@ -87,6 +87,6 @@
     //}
     NSLog(@"row: %ld length: %ld returns %f", (long)row, r.mDescription.length, height);
     //NSLog(@"%@", r.mDescription);
-    return height;
+    return 69;
 }
 @end
