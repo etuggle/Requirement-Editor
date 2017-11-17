@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C11E4E61FBF1E92009305BE /* TestSequenceDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11E4E51FBF1E92009305BE /* TestSequenceDelegate.m */; };
 		2C256CAB1F990320004F8E5B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C256CAA1F990320004F8E5B /* AppDelegate.m */; };
 		2C256CAE1F990320004F8E5B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C256CAD1F990320004F8E5B /* ViewController.m */; };
 		2C256CB01F990320004F8E5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C256CAF1F990320004F8E5B /* Assets.xcassets */; };
@@ -46,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C11E4E41FBF1E92009305BE /* TestSequenceDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestSequenceDelegate.h; sourceTree = "<group>"; };
+		2C11E4E51FBF1E92009305BE /* TestSequenceDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestSequenceDelegate.m; sourceTree = "<group>"; };
 		2C256CA61F990320004F8E5B /* Requirement Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Requirement Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C256CA91F990320004F8E5B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2C256CAA1F990320004F8E5B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -150,6 +153,8 @@
 				2C256CB11F990320004F8E5B /* Main.storyboard */,
 				2C926C6D1FBDFFCA00A4B627 /* TestSequencesDataSource.h */,
 				2C926C6E1FBDFFCA00A4B627 /* TestSequencesDataSource.m */,
+				2C11E4E41FBF1E92009305BE /* TestSequenceDelegate.h */,
+				2C11E4E51FBF1E92009305BE /* TestSequenceDelegate.m */,
 				2CA6F27C1FA2559F00BE177B /* AssociatedElement.h */,
 				2CA6F27D1FA2559F00BE177B /* AssociatedElement.m */,
 				2C256CB41F990320004F8E5B /* Info.plist */,
@@ -330,6 +335,7 @@
 				2CC0CC681FA0E308001737F5 /* Requirement.m in Sources */,
 				2CA6F27E1FA2559F00BE177B /* AssociatedElement.m in Sources */,
 				2C256CB61F990320004F8E5B /* main.m in Sources */,
+				2C11E4E61FBF1E92009305BE /* TestSequenceDelegate.m in Sources */,
 				2CA6F2811FA2670C00BE177B /* TestSequence.m in Sources */,
 				2C926C6F1FBDFFCA00A4B627 /* TestSequencesDataSource.m in Sources */,
 				2CA6F27B1FA24DD700BE177B /* Project.m in Sources */,

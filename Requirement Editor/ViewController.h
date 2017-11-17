@@ -11,6 +11,7 @@
 #import "RequirementsDataSource.h"
 #import "RequirementsViewDelegate.h"
 #import "TestSequencesDataSource.h"
+#import "TestSequenceDelegate.h"
 
 @interface ViewController : NSViewController
 @property (weak) IBOutlet NSTextField *project;
@@ -25,5 +26,7 @@
 @property (atomic, strong) RequirementsDataSource *reqDS;
 @property (atomic, strong) RequirementsViewDelegate *reqDelegate;
 @property (atomic, strong) TestSequencesDataSource *testSeqDS;
+@property (atomic, strong) TestSequenceDelegate *testSeqDelegate;
+
 @end
 
