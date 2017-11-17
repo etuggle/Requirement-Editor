@@ -48,9 +48,7 @@
         return [_sequences objectAtIndex:index];
     }
     
-    //if ([item isKindOfClass:[NSDictionary class]]) {
-    //    return [[item objectForKey:@"children"] objectAtIndex:index];
-    //}
+    
     if ([item isKindOfClass:[TestSequence class]]) {
         TestSequence *ts = item;
         TestDefinition *td = [ts.testDefinitions objectAtIndex:index];
@@ -60,6 +58,21 @@
     return nil;
 }
 
+- (void)outlineView:(NSOutlineView *)outlineView setObjectValue:(id)object forTableColumn:(NSTableColumn *)theColumn byItem:(id)item {
+   
+    if ([[theColumn identifier] isEqualToString:@"Description"]) {
+        if ([item isKindOfClass:[TestSequence class]]) {
+            TestSequence *ts = item;
+            [ts setMDescription:object];
+        } else {
+            TestDefinition *td = item;
+            [td setMDescription:object];
+        }
+    } else {
+        TestExecElement *tee = item;
+        [tee setMName:object];
+    }
+}
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)theColumn byItem:(id)item
 {
         if ([[theColumn identifier] isEqualToString:@"Description"]) {
@@ -73,25 +86,6 @@
             TestExecElement *tee = item;
             return tee.mName;
         }
-        /*
-        if ([item isKindOfClass:[NSDictionary class]]) {
-            NSObject *obj = [item objectForKey:@"parent"];
-            if ( [obj isKindOfClass:[TestSequence class]]) {
-                return ((TestSequence *)obj).mDescription;
-            } else {
-                TestDefinition *td = [item objectForKey:@"children"];
-                return td.mDescription;
-            }
-        }
-        return item;
-         
-    }else{
-        if ([item isKindOfClass:[NSDictionary class]]) {
-            TestSequence *ts = [item objectForKey:@"parent"];
-            return ts.mName;
-        }
-    }
-         */
     
     return nil;
 }

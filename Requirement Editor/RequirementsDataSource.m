@@ -127,7 +127,9 @@
             [alert setMessageText:@"Invalid Verification Method Specified."];
             [alert setInformativeText:@"Valid options are 'Demonstration', 'Test', Analysis', 'Inspection'"];
             [alert setAlertStyle:NSAlertStyleWarning];
-           
+            if ([alert runModal] == NSAlertFirstButtonReturn) {
+               
+            }
         }
         
     } else {
