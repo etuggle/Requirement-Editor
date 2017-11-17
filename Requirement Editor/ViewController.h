@@ -13,7 +13,7 @@
 #import "TestSequencesDataSource.h"
 #import "TestSequenceDelegate.h"
 
-@interface ViewController : NSViewController
+@interface ViewController : NSViewController <NSTextViewDelegate>
 -(void) updateItem:(id)item;
 
 @property (weak) IBOutlet NSTextField *project;

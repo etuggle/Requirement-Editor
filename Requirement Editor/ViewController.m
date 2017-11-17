@@ -13,7 +13,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [_itemDescription setDelegate:self];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -295,6 +296,41 @@
         [_itemDescription setString:td.mDescription ?:@""];
     }
 }
+- (IBAction)valueChanged:(id)sender {
+    [self updateItem];
+}
+-(void)textDidChange:(NSNotification *)notification {
+    [self updateItem];
+}
+
+-(void) updateItem {
+    id item = [_seqViewControl itemAtRow:[_seqViewControl selectedRow]];
+    if ([item isKindOfClass:[TestSequence class]]) {
+        TestSequence *ts = item;
+
+        NSString *desc = [[NSString alloc] initWithFormat:@"%@",_itemDescription.string];
+        [ts setMDescription:desc];
+        [ts setMName:[_itemName stringValue]];
+    } else {
+        TestDefinition *td = item;
+        NSString *value;
+        [td setMName:[_itemName stringValue]];
+        [td setMStatus:[_itemStatus stringValue]];
+        [td.script setArguments:[_itemArguments stringValue]];
+        [td.script setParamFile:[_itemParamFile stringValue]];
+        [td.script setGlobalFile:[_itemGlobalFile stringValue]];
+        [td.script setScriptRelPath:[_itemScriptPath stringValue]];
+        [td.script setScriptCMLoc:[_itemScriptCmLoc stringValue]];
+        [td.script setPythonPath:[_itemPythonPath stringValue]];
+
+        value = [[NSString alloc] initWithFormat:@"%@",_itemDescription.string];
+        [td setMDescription:value];
+    }
+    [_seqViewControl setNeedsDisplay:YES];
+
+
+}
+
 -(void) clearValues {
     [_itemName setStringValue:@""];
     [_itemStatus setStringValue:@""];

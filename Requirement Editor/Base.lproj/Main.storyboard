@@ -993,6 +993,9 @@
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="valueChanged:" target="XfG-lQ-9wD" id="Lu8-ee-sT4"/>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38e-so-Uue">
                                 <rect key="frame" x="649" y="644" width="47" height="17"/>
@@ -1011,6 +1014,9 @@
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="valueChanged:" target="XfG-lQ-9wD" id="AMh-FM-Ax0"/>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aaR-uW-7Ic">
                                 <rect key="frame" x="622" y="614" width="74" height="17"/>
@@ -1029,6 +1035,9 @@
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="valueChanged:" target="XfG-lQ-9wD" id="D2g-sX-qCP"/>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ia0-Ta-9G6">
                                 <rect key="frame" x="625" y="584" width="71" height="17"/>
@@ -1047,6 +1056,9 @@
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="valueChanged:" target="XfG-lQ-9wD" id="PLe-Sb-hAh"/>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PZz-EN-T94">
                                 <rect key="frame" x="624" y="554" width="72" height="17"/>
@@ -1065,6 +1077,9 @@
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="valueChanged:" target="XfG-lQ-9wD" id="oVo-ve-2hO"/>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZHw-0S-HTp">
                                 <rect key="frame" x="621" y="524" width="75" height="17"/>
@@ -1083,6 +1098,9 @@
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="valueChanged:" target="XfG-lQ-9wD" id="bYY-rw-FLy"/>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BN6-hp-fLT">
                                 <rect key="frame" x="572" y="494" width="124" height="17"/>
@@ -1101,6 +1119,9 @@
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="valueChanged:" target="XfG-lQ-9wD" id="iW4-Nt-V2i"/>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wil-as-WLo">
                                 <rect key="frame" x="614" y="464" width="82" height="17"/>
@@ -1128,6 +1149,9 @@
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="valueChanged:" target="XfG-lQ-9wD" id="fGj-as-Nas"/>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x1g-FU-xyT">
                                 <rect key="frame" x="652" y="674" width="44" height="17"/>
@@ -1155,6 +1179,9 @@
                                         </textView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <outlet property="documentView" destination="b44-LH-7O5" id="d91-3N-hdC"/>
+                                    </connections>
                                 </clipView>
                                 <edgeInsets key="scrollerInsets" left="0.0" right="10" top="0.0" bottom="0.0"/>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="9cj-x3-QxG">

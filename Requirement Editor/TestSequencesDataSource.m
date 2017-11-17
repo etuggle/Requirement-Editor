@@ -77,7 +77,7 @@
 {
         if ([[theColumn identifier] isEqualToString:@"Description"]) {
             if ([item isKindOfClass:[TestSequence class]]) {
-                
+                NSLog(@"Description: %@", ((TestSequence *)item).mDescription);
                 return ((TestSequence *)item).mDescription;
             } else {
                 return ((TestDefinition*)item).mDescription;
