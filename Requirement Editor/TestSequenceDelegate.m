@@ -7,6 +7,7 @@
 //
 
 #import "TestSequenceDelegate.h"
+#import "ViewController.h"
 
 @implementation TestSequenceDelegate
 
@@ -16,18 +17,8 @@
     NSOutlineView *oView = notification.object;
     
     id item = [oView itemAtRow:[oView selectedRow]];
-    NSString *foo;
-    if ([item isKindOfClass:[TestSequence class]]) {
-        TestSequence *ts = item;
-        foo = ts.mName;
-    } else {
-        TestDefinition *td = item;
-        foo = td.mName;
-    }
-    NSLog(@"received notification: %@ for row %ld, name=%@", notification.name, oView.selectedRow, foo);
-    
-    //[tView setNeedsDisplay:YES];
-   
-    
+    ViewController *vc = _mainView;
+    [vc updateItem:item];
 }
+
 @end

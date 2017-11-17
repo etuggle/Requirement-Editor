@@ -58,6 +58,7 @@
             _reqDelegate = [[RequirementsViewDelegate alloc] init];
             _testSeqDS = [[TestSequencesDataSource alloc] initWithSequences:sequences];
             _testSeqDelegate = [[TestSequenceDelegate alloc] init];
+            [_testSeqDelegate setMainView:self];
             
             [_reqDS setRequirements:requirements];
             [_reqViewCtrl setDataSource:_reqDS];
@@ -271,5 +272,41 @@
     NSXMLElement *element = (NSXMLElement *)[NSXMLNode elementWithName:name];
     [element setStringValue:value];
     return element;
+}
+
+- (void) updateItem:(id)item {
+    if ([item isKindOfClass:[TestSequence class]]) {
+        TestSequence *ts = item;
+        [self clearValues];
+        [_itemName setStringValue:ts.mName];
+        [_itemDescription setString:ts.mDescription];
+        
+    } else {
+        TestDefinition *td = item;
+        [self clearValues];
+        [_itemName setStringValue:td.mName ?: @"None"];
+        [_itemStatus setStringValue:td.mStatus ?: @"UNTESTED"];
+        [_itemArguments setStringValue:td.script.arguments ?: @"-v"];
+        [_itemParamFile setStringValue:td.script.paramFile ?:@""];
+        [_itemGlobalFile setStringValue:td.script.globalFile ?:@""];
+        [_itemScriptPath setStringValue:td.script.scriptRelPath ?:@""];
+        [_itemScriptCmLoc setStringValue:td.script.scriptCMLoc ?:@"" ] ;
+        [_itemPythonPath setStringValue:td.script.pythonPath ?:@""];
+        [_itemDescription setString:td.mDescription ?:@""];
+    }
+}
+-(void) clearValues {
+    [_itemName setStringValue:@""];
+    [_itemStatus setStringValue:@""];
+    [_itemArguments setStringValue:@""];
+    [_itemParamFile setStringValue:@""];
+    [_itemGlobalFile setStringValue:@""];
+    [_itemScriptPath setStringValue:@""];
+    [_itemScriptCmLoc setStringValue:@""];
+    [_itemPythonPath setStringValue:@""];
+
+    [_itemDescription setString:@""];
+
+
 }
 @end
