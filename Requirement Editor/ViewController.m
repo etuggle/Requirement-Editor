@@ -298,6 +298,13 @@
     } else {
         TestDefinition *td = item;
         [self clearValues];
+        
+        NSMutableArray *requirements = [_reqDS requirements];
+        for (int i=0; i<[td.mAssociations count]; i++) {
+            Association *a = td.mAssociations[i];
+            NSLog(@"%@ - %@", a.mName, a.mExternalId);
+        }
+        
         [_itemName setStringValue:td.mName ?: @"None"];
         [_itemStatus setStringValue:td.mStatus ?: @"UNTESTED"];
         [_itemArguments setStringValue:td.script.arguments ?: @"-v"];
@@ -320,6 +327,7 @@
 
     }
 }
+
 - (IBAction)valueChanged:(id)sender {
     [self updateItem];
 }
