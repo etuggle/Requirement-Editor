@@ -14,6 +14,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [_itemDescription setDelegate:self];
+    [_typeLabel setStringValue:@""];
+
     
     // Do any additional setup after loading the view.
 }
@@ -281,6 +283,17 @@
         [self clearValues];
         [_itemName setStringValue:ts.mName];
         [_itemDescription setString:ts.mDescription];
+        [_typeLabel setStringValue:@"Test Sequence"];
+        
+        [_itemStatus setEnabled:NO];
+        [_itemArguments setEnabled:NO];
+        [_itemParamFile setEnabled:NO];
+        [_itemGlobalFile setEnabled:NO];
+        [_itemScriptPath setEnabled:NO];
+        [_itemScriptCmLoc setEnabled:NO];
+        [_itemPythonPath setEnabled:NO];
+
+
         
     } else {
         TestDefinition *td = item;
@@ -294,6 +307,17 @@
         [_itemScriptCmLoc setStringValue:td.script.scriptCMLoc ?:@"" ] ;
         [_itemPythonPath setStringValue:td.script.pythonPath ?:@""];
         [_itemDescription setString:td.mDescription ?:@""];
+        [_typeLabel setStringValue:@"Test Definition "];
+        
+        [_itemStatus setEnabled:YES];
+        [_itemArguments setEnabled:YES];
+        [_itemParamFile setEnabled:YES];
+        [_itemGlobalFile setEnabled:YES];
+        [_itemScriptPath setEnabled:YES];
+        [_itemScriptCmLoc setEnabled:YES];
+        [_itemPythonPath setEnabled:YES];
+
+
     }
 }
 - (IBAction)valueChanged:(id)sender {
@@ -307,13 +331,13 @@
     id item = [_seqViewControl itemAtRow:[_seqViewControl selectedRow]];
     if ([item isKindOfClass:[TestSequence class]]) {
         TestSequence *ts = item;
-
         NSString *desc = [[NSString alloc] initWithFormat:@"%@",_itemDescription.string];
         [ts setMDescription:desc];
         [ts setMName:[_itemName stringValue]];
     } else {
         TestDefinition *td = item;
         NSString *value;
+
         [td setMName:[_itemName stringValue]];
         [td setMStatus:[_itemStatus stringValue]];
         [td.script setArguments:[_itemArguments stringValue]];

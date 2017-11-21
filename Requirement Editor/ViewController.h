@@ -33,6 +33,7 @@
 @property (weak) IBOutlet NSTextField *itemScriptCmLoc;
 @property (weak) IBOutlet NSTextField *itemPythonPath;
 @property (unsafe_unretained) IBOutlet NSTextView *itemDescription;
+@property (weak) IBOutlet NSTextField *typeLabel;
 
 @property (atomic, strong) XmlParserDelegate * parserDelegate;
 @property (atomic, strong) RequirementsDataSource *reqDS;

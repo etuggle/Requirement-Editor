@@ -898,11 +898,11 @@
                                 </clipView>
                                 <edgeInsets key="scrollerInsets" left="0.0" right="10" top="0.0" bottom="0.0"/>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="QBu-N0-AfV">
-                                    <rect key="frame" x="1" y="292" width="1151" height="16"/>
+                                    <rect key="frame" x="-4" y="7" width="0.0" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="KyH-Pv-Ouf">
-                                    <rect key="frame" x="-15" y="23" width="16" height="0.0"/>
+                                    <rect key="frame" x="-25" y="23" width="16" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="aZ8-5B-dbS">
@@ -1240,7 +1240,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="66" minWidth="10" maxWidth="3.4028234663852886e+38" id="zZ1-IY-nL8">
+                                                <tableColumn identifier="" width="210" minWidth="10" maxWidth="3.4028234663852886e+38" id="zZ1-IY-nL8">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1279,7 +1279,7 @@
                                 </clipView>
                                 <edgeInsets key="scrollerInsets" left="0.0" right="10" top="0.0" bottom="0.0"/>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="jSU-bc-iGJ">
-                                    <rect key="frame" x="1" y="7" width="0.0" height="16"/>
+                                    <rect key="frame" x="-4" y="7" width="0.0" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="jiR-z3-46K">
@@ -1291,6 +1291,15 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ca7-ps-PRU">
+                                <rect key="frame" x="700" y="714" width="270" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="IgZ-yN-OVJ">
+                                    <font key="font" metaFont="system" size="20"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
@@ -1310,6 +1319,7 @@
                         <outlet property="project" destination="88C-IA-OzK" id="xN6-vW-n7t"/>
                         <outlet property="reqViewCtrl" destination="uzL-4k-V0I" id="fox-pH-Uoo"/>
                         <outlet property="seqViewControl" destination="gql-tJ-9aO" id="ocj-uM-LmC"/>
+                        <outlet property="typeLabel" destination="ca7-ps-PRU" id="fqy-Bb-0a4"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
