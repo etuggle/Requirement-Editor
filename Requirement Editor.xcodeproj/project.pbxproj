@@ -27,6 +27,7 @@
 		2CC0CC6B1FA0F787001737F5 /* Association.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0CC6A1FA0F787001737F5 /* Association.m */; };
 		2CC0CC6E1FA12637001737F5 /* TestExecElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0CC6D1FA12637001737F5 /* TestExecElement.m */; };
 		2CC8D7C51FBBC6FD006F75D7 /* RequirementsViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8D7C41FBBC6FC006F75D7 /* RequirementsViewDelegate.m */; };
+		2CF094451FEC4E41009347E6 /* AssocRequirementDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF094441FEC4E41009347E6 /* AssocRequirementDataSource.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,8 @@
 		2CC0CC6D1FA12637001737F5 /* TestExecElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestExecElement.m; sourceTree = "<group>"; };
 		2CC8D7C31FBBC6FC006F75D7 /* RequirementsViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequirementsViewDelegate.h; sourceTree = "<group>"; };
 		2CC8D7C41FBBC6FC006F75D7 /* RequirementsViewDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequirementsViewDelegate.m; sourceTree = "<group>"; };
+		2CF094431FEC4E41009347E6 /* AssocRequirementDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssocRequirementDataSource.h; sourceTree = "<group>"; };
+		2CF094441FEC4E41009347E6 /* AssocRequirementDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssocRequirementDataSource.m; sourceTree = "<group>"; };
 		2CF7ED341FB237C400825D09 /* Requirement Editor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Requirement Editor.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +127,8 @@
 				2C256CBF1F990320004F8E5B /* Requirement EditorTests */,
 				2C256CCA1F990320004F8E5B /* Requirement EditorUITests */,
 				2C256CA71F990320004F8E5B /* Products */,
+				2CF094431FEC4E41009347E6 /* AssocRequirementDataSource.h */,
+				2CF094441FEC4E41009347E6 /* AssocRequirementDataSource.m */,
 			);
 			sourceTree = "<group>";
 		};
@@ -344,6 +349,7 @@
 				2CC0CC641FA0D0AA001737F5 /* XmlParserDelegate.m in Sources */,
 				2CC0CC6B1FA0F787001737F5 /* Association.m in Sources */,
 				2CA6F2841FA2671C00BE177B /* Script.m in Sources */,
+				2CF094451FEC4E41009347E6 /* AssocRequirementDataSource.m in Sources */,
 				2CC0CC6E1FA12637001737F5 /* TestExecElement.m in Sources */,
 				2C45EDBD1FB510BB00B7C459 /* RequirementsDataSource.m in Sources */,
 			);

@@ -59,6 +59,7 @@
             
             _reqDS = [[RequirementsDataSource alloc] init];
             _reqDelegate = [[RequirementsViewDelegate alloc] init];
+            
             _testSeqDS = [[TestSequencesDataSource alloc] initWithSequences:sequences];
             _testSeqDelegate = [[TestSequenceDelegate alloc] init];
             [_testSeqDelegate setMainView:self];
@@ -66,8 +67,14 @@
             [_reqDS setRequirements:requirements];
             [_reqViewCtrl setDataSource:_reqDS];
             [_reqViewCtrl setDelegate:_reqDelegate];
+            [_reqDS setProject:currentProject];
+            
+            
             [_seqViewControl setDataSource:_testSeqDS];
             [_seqViewControl setDelegate:_testSeqDelegate];
+            
+            _assocReqDataSource = [[AssocRequirementDataSource alloc] init];
+            [_assocReqViewControl setDataSource:_assocReqDataSource];
             
             _project.stringValue=currentProject.mName;
             _numRequirements.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)[requirements count] ];
@@ -81,9 +88,19 @@
                 numTestDefs += [currentSequence.testDefinitions count];
             }
             _numTests.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)numTestDefs ];
-
+            
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(editingDidEnd:)
+                                                         name:NSControlTextDidEndEditingNotification object:nil];
         }
     }];
+}
+// somewhere else in the .m file
+- (void)editingDidEnd:(NSNotification *)notification {
+    if (notification.object == _reqViewCtrl) {
+        [_assocReqViewControl reloadData];
+    } else {
+        [_reqViewCtrl reloadData];
+    }
 }
 
 - (IBAction) saveDocument:() sender {
@@ -299,7 +316,20 @@
         TestDefinition *td = item;
         [self clearValues];
         
-        NSMutableArray *requirements = [_reqDS requirements];
+        // Get requirements associated with this test definition.
+        NSMutableArray <Requirement *> *requirements = [_reqDS requirements];
+        
+        //Populate the data source with the requirements.
+        // The requirements associated with this test definition are
+        // contained the the Associations field of the test plan.
+        
+        //Create a new data source
+        _assocReqDataSource.associations = td.mAssociations;
+        [_assocReqDataSource setRequirements:requirements];
+        
+        [_assocReqViewControl reloadData];
+        [_assocReqViewControl setNeedsDisplay:YES];
+        
         for (int i=0; i<[td.mAssociations count]; i++) {
             Association *a = td.mAssociations[i];
             NSLog(@"%@ - %@", a.mName, a.mExternalId);

@@ -12,6 +12,7 @@
 #import "RequirementsViewDelegate.h"
 #import "TestSequencesDataSource.h"
 #import "TestSequenceDelegate.h"
+#import "AssocRequirementDataSource.h"
 
 @interface ViewController : NSViewController <NSTextViewDelegate>
 -(void) updateItem:(id)item;
@@ -23,6 +24,7 @@
 @property (weak) IBOutlet NSTextField *numSequences;
 @property (weak) IBOutlet NSTextField *numTests;
 @property (weak) IBOutlet NSOutlineView *seqViewControl;
+@property (weak) IBOutlet NSTableView *assocReqViewControl;
 
 @property (weak) IBOutlet NSTextField *itemName;
 @property (weak) IBOutlet NSTextField *itemStatus;
@@ -39,6 +41,7 @@
 @property (atomic, strong) RequirementsDataSource *reqDS;
 @property (atomic, strong) RequirementsViewDelegate *reqDelegate;
 @property (atomic, strong) TestSequencesDataSource *testSeqDS;
+@property (atomic, strong) AssocRequirementDataSource *assocReqDataSource;
 @property (atomic) TestSequenceDelegate *testSeqDelegate;
 
 @end

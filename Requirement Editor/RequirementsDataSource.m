@@ -94,8 +94,50 @@
     if ([aTableColumn.identifier isEqualToString:@"ID"]) {
         [r setVerificationMethod:anObject];
     } else if ([aTableColumn.identifier isEqualToString:@"Name"]) {
+        // Set the name on the requirement
         [r setMName:anObject];
+        
+        // If this requirement is associatec with a TestDefinition
+        // the name will also need to be set in that association.
+        
+        // grab the test sequences from the project
+        NSMutableArray *testSequences = _project.testSequences;
+        
+        // Look look through the sequence at all the test definitions.
+        // Requirements are allocated to test definitions not sequences.
+        for (int numSequence=0; numSequence<[testSequences count]; numSequence++) {
+            TestSequence *testSequence = [testSequences objectAtIndex:numSequence];
+
+            // Grab all test definitions associated with this sequence
+            NSMutableArray *testDefinitions = testSequence.testDefinitions;
+            
+            // Each test definition may have a list of associations.  These
+            // associations represent the allocated requirements.
+            // Look through the associations on each test definition
+            // to see if any match the modified requirement
+            for (int numTestDef=0; numTestDef < [testDefinitions count]; numTestDef++) {
+                TestDefinition *td = [testDefinitions objectAtIndex:numTestDef];
+                
+                // Grab associations
+                NSMutableArray *associations = td.mAssociations;
+                
+                // see if we can find the requirement id in this list
+                for (int assocNum=0; assocNum<[associations count]; assocNum++) {
+                    Association *a = [associations objectAtIndex:assocNum];
+                    
+                    if ([r.externalId isEqualToString:a.mExternalId]) {
+                        // Found a match
+                        [a setMName:anObject];
+                        
+                        // A requirement can only be associated once, so we're done
+                        break;
+                    }
+                }
+            }
+            
+        }
     } else if ([aTableColumn.identifier isEqualToString:@"Description"]) {
+        // Set the description
         [r setMDescription:anObject];
 
     }  else if ([aTableColumn.identifier isEqualToString:@"Manual"]) {
