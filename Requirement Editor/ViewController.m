@@ -137,7 +137,9 @@
             [_FileLabel setStringValue:(filePath)];
             // Open  the file and save the XML to the file.
             
-            Project * projectToSave = _parserDelegate.project;
+            //Project * projectToSave = _parserDelegate.project;
+            Project * projectToSave = _currentProject;
+
             
             // Create the top level element
             NSXMLElement *root = (NSXMLElement *)[NSXMLNode elementWithName:@"TestExec"];
