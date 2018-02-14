@@ -8,9 +8,6 @@
 
 #import "ViewController.h"
 
-int numTestDefs;
-Project * currentProject;
-
 @implementation ViewController
 
 - (void)viewDidLoad {
@@ -18,20 +15,20 @@ Project * currentProject;
     [_itemDescription setDelegate:self];
     [_typeLabel setStringValue:@""];
     
-    currentProject = [self createEmptyProject];
-    _testSeqDS = [[TestSequencesDataSource alloc] initWithSequences:currentProject.testSequences];
+    _currentProject = [self createEmptyProject];
+    _testSeqDS = [[TestSequencesDataSource alloc] initWithSequences:_currentProject.testSequences];
     _testSeqDelegate = [[TestSequenceDelegate alloc] init];
     [_testSeqDelegate setMainView:self];
     [_seqViewControl setDataSource:_testSeqDS];
     [_seqViewControl setDelegate:_testSeqDelegate];
     
-    NSMutableArray *requirements = currentProject.requirements;
+    NSMutableArray *requirements = _currentProject.requirements;
     _reqDS = [[RequirementsDataSource alloc] init];
     _reqDelegate = [[RequirementsViewDelegate alloc] init];
     [_reqDS setRequirements:requirements];
     [_reqViewCtrl setDataSource:_reqDS];
     [_reqViewCtrl setDelegate:_reqDelegate];
-    [_reqDS setProject:currentProject];
+    [_reqDS setProject:_currentProject];
     
     _assocReqDataSource = [[AssocRequirementDataSource alloc] init];
     [_assocReqViewControl setDataSource:_assocReqDataSource];
@@ -79,28 +76,28 @@ Project * currentProject;
             
             for (int i=0; i<[sequences count]; i++) {
                 TestSequence * ts = sequences[i];
-                [currentProject addTestSequence:ts];
+                [_currentProject addTestSequence:ts];
             }
             for (int i=0; i<[requirements count]; i++) {
-                [currentProject addRequirement:requirements[i]];
+                [_currentProject addRequirement:requirements[i]];
             }
             [_seqViewControl reloadData];
             [_reqViewCtrl reloadData];
             
             // Set the project name
-            _project.stringValue=currentProject.mName;
+            _project.stringValue=_currentProject.mName;
             
             _numRequirements.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)[requirements count] ];
             _numSequences.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)[sequences count] ];
             
-            numTestDefs = 0;
+            _numTestDefs = 0;
             // Since each sequence may contain
             for (int i=0; i<[sequences count]; i++) {
                 //numTestDefs = sequences[i]
                 TestSequence *currentSequence = [sequences objectAtIndex:i];
-                numTestDefs += [currentSequence.testDefinitions count];
+                _numTestDefs += [currentSequence.testDefinitions count];
             }
-            _numTests.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)numTestDefs ];
+            _numTests.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)_numTestDefs ];
         }
     }];
 }
@@ -385,14 +382,14 @@ Project * currentProject;
     // Sequence.
     id selectedItem = [_seqViewControl itemAtRow:[_seqViewControl selectedRow]];
     
-    if (currentProject == NULL) {
-        currentProject = [self createEmptyProject];
-         _project.stringValue=currentProject.mName;
+    if (_currentProject == NULL) {
+        NSLog(@"**** UNTESTED ****");
+        _currentProject = [self createEmptyProject];
+         _project.stringValue=_currentProject.mName;
     }
     if (selectedItem == NULL) {
         // Nothing is selected so insert a new test sequence.
-        NSLog(@"Insert a new test sequence.");
-        NSMutableArray *sequences = currentProject.testSequences;
+        NSMutableArray *sequences = _currentProject.testSequences;
         
         NSTimeInterval timeInSeconds = [[NSDate date] timeIntervalSince1970];
         NSString *timeString =[NSString stringWithFormat:@"%0.0f", timeInSeconds*1e7];
@@ -411,7 +408,7 @@ Project * currentProject;
         [ts addTestDefinition:td];
         _numSequences.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)[sequences count] ];
         
-        [currentProject addTestSequence:ts];
+        [_currentProject addTestSequence:ts];
     } else {
         // A test sequence or test definition is selected.
         // If a test definition is selected we'll need to find the parent for the definition.
@@ -430,8 +427,8 @@ Project * currentProject;
         
         // Add it to the sequence
         [ts addTestDefinition:td];
-        numTestDefs++;
-        _numTests.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)numTestDefs ];
+        _numTestDefs++;
+        _numTests.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)_numTestDefs ];
     }
     // refresh the scrolling list by reloading the data.
     [_seqViewControl reloadData];
@@ -447,7 +444,7 @@ Project * currentProject;
     dict[@"uid"] = timeString;
     dict[@"name"] = @"New Project";
     Project * p = [[Project alloc] initWithDict:dict];
-    [currentProject setMDescription:@"Please enter a description"];
+    [_currentProject setMDescription:@"Please enter a description"];
     
     return p;
 }

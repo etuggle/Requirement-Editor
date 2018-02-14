@@ -45,5 +45,8 @@
 @property (atomic, strong) AssocRequirementDataSource *assocReqDataSource;
 @property (atomic) TestSequenceDelegate *testSeqDelegate;
 
+@property (atomic, strong) Project * currentProject;
+@property int numTestDefs;
+
 @end
 
