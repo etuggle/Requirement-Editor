@@ -8,14 +8,38 @@
 
 #import "ViewController.h"
 
-@implementation ViewController
+int numTestDefs;
+Project * currentProject;
 
+@implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [_itemDescription setDelegate:self];
     [_typeLabel setStringValue:@""];
-
+    
+    currentProject = [self createEmptyProject];
+    _testSeqDS = [[TestSequencesDataSource alloc] initWithSequences:currentProject.testSequences];
+    _testSeqDelegate = [[TestSequenceDelegate alloc] init];
+    [_testSeqDelegate setMainView:self];
+    [_seqViewControl setDataSource:_testSeqDS];
+    [_seqViewControl setDelegate:_testSeqDelegate];
+    
+    NSMutableArray *requirements = currentProject.requirements;
+    _reqDS = [[RequirementsDataSource alloc] init];
+    _reqDelegate = [[RequirementsViewDelegate alloc] init];
+    [_reqDS setRequirements:requirements];
+    [_reqViewCtrl setDataSource:_reqDS];
+    [_reqViewCtrl setDelegate:_reqDelegate];
+    [_reqDS setProject:currentProject];
+    
+    _assocReqDataSource = [[AssocRequirementDataSource alloc] init];
+    [_assocReqViewControl setDataSource:_assocReqDataSource];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(editingDidEnd:)
+                                                 name:NSControlTextDidEndEditingNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(blah:) name:@"RowUpdated" object: nil];
+    
     
     // Do any additional setup after loading the view.
 }
@@ -23,10 +47,10 @@
 
 - (void)setRepresentedObject:(id)representedObject {
     [super setRepresentedObject:representedObject];
-
+    
     // Update the view, if already loaded.
 }
- 
+
 - (IBAction) openDocument:() sender {
     NSLog(@"open document");
     NSOpenPanel* panel = [NSOpenPanel openPanel];
@@ -36,48 +60,40 @@
     // item or cancels the panel.
     [panel beginWithCompletionHandler:^(NSInteger result){
         if (result == NSFileHandlingPanelOKButton) {
-            
-            
+
             NSURL*  theDoc = [[panel URLs] objectAtIndex:0];
-   
+            
             NSString * filePath = [theDoc path];
             
             [_FileLabel setStringValue:(filePath)];
+            
             // Open  the document.
-            //NSXMLParser *xmlparser = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:filePath]];
             NSXMLParser *xmlparser = [[NSXMLParser alloc] initWithContentsOfURL:theDoc];
             
             _parserDelegate = [[XmlParserDelegate alloc] init];
             [xmlparser setDelegate:_parserDelegate];
             [xmlparser parse];
-            Project * currentProject = _parserDelegate.project;
-            NSMutableArray *requirements = currentProject.requirements;
-            NSMutableArray *sequences = currentProject.testSequences;
+            //currentProject = _parserDelegate.project;
+            NSMutableArray *requirements = _parserDelegate.project.requirements;
+            NSMutableArray *sequences = _parserDelegate.project.testSequences;
             
-            _reqDS = [[RequirementsDataSource alloc] init];
-            _reqDelegate = [[RequirementsViewDelegate alloc] init];
+            for (int i=0; i<[sequences count]; i++) {
+                TestSequence * ts = sequences[i];
+                [currentProject addTestSequence:ts];
+            }
+            for (int i=0; i<[requirements count]; i++) {
+                [currentProject addRequirement:requirements[i]];
+            }
+            [_seqViewControl reloadData];
+            [_reqViewCtrl reloadData];
             
-            _testSeqDS = [[TestSequencesDataSource alloc] initWithSequences:sequences];
-            _testSeqDelegate = [[TestSequenceDelegate alloc] init];
-            [_testSeqDelegate setMainView:self];
-            
-            [_reqDS setRequirements:requirements];
-            [_reqViewCtrl setDataSource:_reqDS];
-            [_reqViewCtrl setDelegate:_reqDelegate];
-            [_reqDS setProject:currentProject];
-            
-            
-            [_seqViewControl setDataSource:_testSeqDS];
-            [_seqViewControl setDelegate:_testSeqDelegate];
-            
-            _assocReqDataSource = [[AssocRequirementDataSource alloc] init];
-            [_assocReqViewControl setDataSource:_assocReqDataSource];
-            
+            // Set the project name
             _project.stringValue=currentProject.mName;
+            
             _numRequirements.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)[requirements count] ];
             _numSequences.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)[sequences count] ];
             
-            int numTestDefs = 0;
+            numTestDefs = 0;
             // Since each sequence may contain
             for (int i=0; i<[sequences count]; i++) {
                 //numTestDefs = sequences[i]
@@ -85,16 +101,11 @@
                 numTestDefs += [currentSequence.testDefinitions count];
             }
             _numTests.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)numTestDefs ];
-            
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(editingDidEnd:)
-                                                         name:NSControlTextDidEndEditingNotification object:nil];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(blah:) name:@"RowUpdated" object: nil];
         }
     }];
 }
 
 -(void) blah:(NSNotification *)notification {
-    NSLog(@"here i am");
     [self updateItem:notification.object];
 }
 
@@ -113,7 +124,7 @@
     NSLog(@"save document");
     // create the save panel
     NSSavePanel *panel = [NSSavePanel savePanel];
-
+    
     // This method displays the panel and returns immediately.
     // The completion handler is called when the user selects an
     // item or cancels the panel.
@@ -130,7 +141,7 @@
             // Open  the file and save the XML to the file.
             
             Project * projectToSave = _parserDelegate.project;
-           
+            
             // Create the top level element
             NSXMLElement *root = (NSXMLElement *)[NSXMLNode elementWithName:@"TestExec"];
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
@@ -244,14 +255,14 @@
     [requirementElement addChild:[self createSimpleElement:@"AssignedTo" :req.assignedTo]];
     [requirementElement addChild:[self createSimpleElement:@"VerificationMethod" :req.verificationMethod]];
     [requirementElement addChild:[self createSimpleElement:@"ProjectID" :[[NSString alloc] initWithFormat:@"%d",req.mProjectId]]];
-
+    
     return requirementElement;
 }
 - (NSXMLElement *) createTestDefinitionElement:(TestDefinition *)testDef {
     
     NSXMLElement *testDefElement = [self createElement:testDef :@"TestDefinition"];
     [testDefElement addAttribute:[NSXMLNode attributeWithName:@"status" stringValue:testDef.mStatus]];
-
+    
     [testDefElement addChild:[self createScript:testDef.script]];
     
     // Process the coverage for this requirement
@@ -263,7 +274,7 @@
     [testDefElement addChild:coverage];
     [testDefElement addChild:[self createSimpleElement:@"TestSteps" :@""]];
     [testDefElement addChild:[self createSimpleElement:@"Attachments" :@""]];
-   
+    
     return testDefElement;
 }
 
@@ -276,12 +287,12 @@
     [scriptElement addChild:[self createSimpleElement:@"ScriptCMLoc" :script.scriptCMLoc]];
     [scriptElement addChild:[self createSimpleElement:@"BaseCMLoc" :script.baseCMLoc]];
     [scriptElement addChild:[self createSimpleElement:@"PythonPath" :script.pythonPath]];
-
+    
     return scriptElement;
 }
 - (NSXMLElement *) createAssociationElement:(Association *)assoc {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-
+    
     NSXMLElement *associationElement = (NSXMLElement *)[NSXMLNode elementWithName:@"Association"];
     dict = [[NSMutableDictionary alloc] init];
     dict[@"status"] = assoc.mStatus;
@@ -315,8 +326,8 @@
         [_itemScriptPath setEnabled:NO];
         [_itemScriptCmLoc setEnabled:NO];
         [_itemPythonPath setEnabled:NO];
-
-
+        
+        
         
     } else {
         TestDefinition *td = item;
@@ -341,19 +352,7 @@
             NSLog(@"%@ - %@", a.mName, a.mExternalId);
         }
         
-        // If the test definition doesn't have a script, we'll need to create and
-        // add one
-        if (td.script == NULL) {
-            Script * script = [Script alloc];
-            [td setScript:script];
-            NSTimeInterval timeInSeconds = [[NSDate date] timeIntervalSince1970];
-            NSString *timeString =[NSString stringWithFormat:@"%0.0f", timeInSeconds*1e7];
-            
-            // We need to generate a new dbid and uid.
-            [script setMUid:timeString];
-            [script setMDbid:timeString];
-            [script setMName:timeString];
-        }
+        
         [_itemName setStringValue:td.mName ?: @"None"];
         [_itemStatus setStringValue:td.mStatus ?: @"UNTESTED"];
         [_itemArguments setStringValue:td.script.arguments ?: @"-v"];
@@ -372,8 +371,6 @@
         [_itemScriptPath setEnabled:YES];
         [_itemScriptCmLoc setEnabled:YES];
         [_itemPythonPath setEnabled:YES];
-
-
     }
 }
 
@@ -387,10 +384,34 @@
     // Need to determine if we are adding a Test Definition or a Test
     // Sequence.
     id selectedItem = [_seqViewControl itemAtRow:[_seqViewControl selectedRow]];
+    
+    if (currentProject == NULL) {
+        currentProject = [self createEmptyProject];
+         _project.stringValue=currentProject.mName;
+    }
     if (selectedItem == NULL) {
         // Nothing is selected so insert a new test sequence.
         NSLog(@"Insert a new test sequence.");
+        NSMutableArray *sequences = currentProject.testSequences;
         
+        NSTimeInterval timeInSeconds = [[NSDate date] timeIntervalSince1970];
+        NSString *timeString =[NSString stringWithFormat:@"%0.0f", timeInSeconds*1e7];
+        
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        dict[@"dbid"] =timeString;
+        dict[@"uid"] = timeString;
+        dict[@"name"] = @"New Test Sequence";
+        
+        TestSequence *ts = [[TestSequence alloc] initWithDict:dict];
+        [ts setMDescription:@"Please add a description"];
+        
+        TestDefinition *td = [self createEmptyTestDefinition];
+        
+        // test sequences must have at least one test definition
+        [ts addTestDefinition:td];
+        _numSequences.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)[sequences count] ];
+        
+        [currentProject addTestSequence:ts];
     } else {
         // A test sequence or test definition is selected.
         // If a test definition is selected we'll need to find the parent for the definition.
@@ -404,23 +425,60 @@
             // A sequence was selected.
             ts = (TestSequence *)selectedItem;
         }
-        // Create and add the new test definition
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-        dict[@"name"] = @"Test Definition Name";
-        NSTimeInterval timeInSeconds = [[NSDate date] timeIntervalSince1970];
-        NSString *timeString =[NSString stringWithFormat:@"%0.0f", timeInSeconds*1e7];
        
-        dict[@"dbid"] =timeString;
-        dict[@"uid"] = timeString;
-        TestDefinition *td = [[TestDefinition alloc] initWithDict:dict];
-        td.mDescription = @" *** Enter a description ***";
+        TestDefinition * td = [self createEmptyTestDefinition];
         
+        // Add it to the sequence
         [ts addTestDefinition:td];
-         NSLog(@"Insert a test definition into Test Sequence: %@", ts.mName);
-     }
-     [_seqViewControl reloadData];
+        numTestDefs++;
+        _numTests.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)numTestDefs ];
+    }
+    // refresh the scrolling list by reloading the data.
+    [_seqViewControl reloadData];
 }
 
+- (Project *) createEmptyProject {
+    NSTimeInterval timeInSeconds = [[NSDate date] timeIntervalSince1970];
+    NSString *timeString =[NSString stringWithFormat:@"%0.0f", timeInSeconds*1e7];
+    
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    dict[@"PythonPath"] = @"None";
+    dict[@"dbid"] =timeString;
+    dict[@"uid"] = timeString;
+    dict[@"name"] = @"New Project";
+    Project * p = [[Project alloc] initWithDict:dict];
+    [currentProject setMDescription:@"Please enter a description"];
+    
+    return p;
+}
+
+- (TestDefinition *) createEmptyTestDefinition {
+    NSTimeInterval timeInSeconds = [[NSDate date] timeIntervalSince1970];
+    NSString *timeString =[NSString stringWithFormat:@"%0.0f", timeInSeconds*1e7];
+    
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    dict[@"dbid"] =timeString;
+    dict[@"uid"] = timeString;
+    
+    // Create and add the new test definition
+    dict[@"name"] = @"Test Definition Name";
+    
+    TestDefinition *td = [[TestDefinition alloc] initWithDict:dict];
+    // Add a script to the test definition
+    if (td.script == NULL) {
+        Script * script = [Script alloc];
+        [td setScript:script];
+        
+        // Set the dbid, uid, and name for the script
+        // TestExed doesn't really care about the script name.  It
+        // should be unique.
+        [script setMUid:timeString];
+        [script setMDbid:timeString];
+        [script setMName:timeString];
+    }
+    td.mDescription = @" *** Enter a description ***";
+    return td;
+}
 -(void) updateItem {
     id item = [_seqViewControl itemAtRow:[_seqViewControl selectedRow]];
     if ([item isKindOfClass:[TestSequence class]]) {
@@ -431,7 +489,7 @@
     } else {
         TestDefinition *td = item;
         NSString *value;
-
+        
         [td setMName:[_itemName stringValue]];
         [td setMStatus:[_itemStatus stringValue]];
         [td.script setArguments:[_itemArguments stringValue]];
@@ -440,13 +498,11 @@
         [td.script setScriptRelPath:[_itemScriptPath stringValue]];
         [td.script setScriptCMLoc:[_itemScriptCmLoc stringValue]];
         [td.script setPythonPath:[_itemPythonPath stringValue]];
-
+        
         value = [[NSString alloc] initWithFormat:@"%@",_itemDescription.string];
         [td setMDescription:value];
     }
     [_seqViewControl setNeedsDisplay:YES];
-   
-
 }
 
 -(void) clearValues {
@@ -458,9 +514,9 @@
     [_itemScriptPath setStringValue:@""];
     [_itemScriptCmLoc setStringValue:@""];
     [_itemPythonPath setStringValue:@""];
-
+    
     [_itemDescription setString:@""];
-
-
+    
 }
 @end
+
