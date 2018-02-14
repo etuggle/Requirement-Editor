@@ -57,7 +57,7 @@
     // item or cancels the panel.
     [panel beginWithCompletionHandler:^(NSInteger result){
         if (result == NSFileHandlingPanelOKButton) {
-
+            
             NSURL*  theDoc = [[panel URLs] objectAtIndex:0];
             
             NSString * filePath = [theDoc path];
@@ -385,7 +385,7 @@
     if (_currentProject == NULL) {
         NSLog(@"**** UNTESTED ****");
         _currentProject = [self createEmptyProject];
-         _project.stringValue=_currentProject.mName;
+        _project.stringValue=_currentProject.mName;
     }
     if (selectedItem == NULL) {
         // Nothing is selected so insert a new test sequence.
@@ -406,9 +406,12 @@
         
         // test sequences must have at least one test definition
         [ts addTestDefinition:td];
-        _numSequences.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)[sequences count] ];
+        _numTestDefs++;
+        _numTests.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)_numTestDefs];
         
         [_currentProject addTestSequence:ts];
+        
+        _numSequences.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)[sequences count] ];
     } else {
         // A test sequence or test definition is selected.
         // If a test definition is selected we'll need to find the parent for the definition.
@@ -422,7 +425,7 @@
             // A sequence was selected.
             ts = (TestSequence *)selectedItem;
         }
-       
+        
         TestDefinition * td = [self createEmptyTestDefinition];
         
         // Add it to the sequence
