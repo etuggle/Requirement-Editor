@@ -16,6 +16,8 @@
 -(instancetype)init NS_UNAVAILABLE;
 -(void)addTestSequence:(TestSequence*)sequence;
 -(void)addRequirement:(Requirement*)req;
+-(void)removeTestSequence:(TestSequence*)sequence;
+
 
 @property (nonatomic, strong) NSString *mPythonPath;
 @property (nonatomic,strong) NSMutableArray *testSequences;

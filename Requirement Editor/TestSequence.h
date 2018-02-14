@@ -13,6 +13,7 @@
 -(instancetype)initWithDict:(NSDictionary *)dict NS_DESIGNATED_INITIALIZER;
 -(instancetype)init NS_UNAVAILABLE;
 - (void) addTestDefinition:(TestDefinition *)testDef;
+- (void) removeTestDefinition:(TestDefinition *)testDef;
 
 @property (nonatomic,strong) NSMutableArray *testDefinitions;
 

@@ -81,7 +81,7 @@
     } else {
         
         // second column (numberCodes)
-        NSString *dbId = [[NSString alloc] initWithFormat:@"%i",r.mUid];
+        NSString *dbId = [[NSString alloc] initWithFormat:@"%@",r.mUid];
         return dbId;
     }
 }

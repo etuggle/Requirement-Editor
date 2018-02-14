@@ -139,7 +139,7 @@
             
             //Project * projectToSave = _parserDelegate.project;
             Project * projectToSave = _currentProject;
-
+            
             
             // Create the top level element
             NSXMLElement *root = (NSXMLElement *)[NSXMLNode elementWithName:@"TestExec"];
@@ -437,6 +437,58 @@
     }
     // refresh the scrolling list by reloading the data.
     [_seqViewControl reloadData];
+}
+
+/**
+ * RemoveTestItem
+ * Removes a selected Test Definition or Test Sequence depending which is selected
+ *
+ */
+- (IBAction)removeTestItem:(id)sender {
+    // Need to determine if we are removing a Test Definition or a Test Sequence.
+    id selectedItem = [_seqViewControl itemAtRow:[_seqViewControl selectedRow]];
+    
+    if (selectedItem == NULL) {
+        return;
+    } else if ([selectedItem isKindOfClass:[TestSequence class]]) {
+        // Get the associated test sequence.
+        TestSequence *ts = (TestSequence *)selectedItem;
+        NSString *msg = [NSString stringWithFormat:@"Deleting %@ and %lu associated Test %@.", ts.mName, (unsigned long)[ts.testDefinitions count], ([ts.testDefinitions count]>1?@"Definitions":@"Definition")];
+        BOOL confirmed = [self confirmDelete:msg];
+        if (confirmed) {
+            _numTestDefs = (int)(_numTestDefs - [ts.testDefinitions count]);
+            [_currentProject removeTestSequence:ts];
+        }
+    } else {
+        // A test def was selected.
+        TestDefinition *td = (TestDefinition *)selectedItem;
+        
+        NSString *msg = [NSString stringWithFormat:@"Deleting '%@'", td.mName];
+        BOOL confirmed = [self confirmDelete:msg];
+        if (confirmed) {
+            _numTestDefs--;
+            
+            // Get the associated test sequence.
+            TestSequence *ts = [_seqViewControl parentForItem:selectedItem];
+            [ts removeTestDefinition:td];
+        }
+    }
+    _numTests.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)_numTestDefs ];
+    _numSequences.stringValue = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)[_currentProject.testSequences count] ];
+    [_seqViewControl reloadData];
+}
+
+-(BOOL) confirmDelete:(NSString *)message {
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:@"OK"];
+    [alert addButtonWithTitle:@"CANCEL"];
+    [alert setMessageText:@"Confirm Delete"];
+    [alert setInformativeText:message];
+    [alert setAlertStyle:NSAlertStyleWarning];
+    if ([alert runModal] == NSAlertFirstButtonReturn) {
+        return YES;
+    }
+    return NO;
 }
 
 - (Project *) createEmptyProject {

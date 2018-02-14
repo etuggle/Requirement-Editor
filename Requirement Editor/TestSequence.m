@@ -22,4 +22,8 @@
 - (void) addTestDefinition:(TestDefinition *)testDef {
     [_testDefinitions addObject:testDef];
 }
+
+-(void) removeTestDefinition:(TestDefinition *)testDef {
+    [_testDefinitions removeObject:testDef];
+}
 @end

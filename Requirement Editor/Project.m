@@ -26,4 +26,8 @@
 - (void) addRequirement:(Requirement *)req {
     [_requirements addObject:req];
 }
+
+-(void)removeTestSequence:(TestSequence *)sequence {
+    [_testSequences removeObject:sequence];
+}
 @end
