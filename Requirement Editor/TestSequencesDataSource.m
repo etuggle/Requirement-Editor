@@ -59,7 +59,7 @@
 }
 
 - (void)outlineView:(NSOutlineView *)outlineView setObjectValue:(id)object forTableColumn:(NSTableColumn *)theColumn byItem:(id)item {
-   
+    
     if ([[theColumn identifier] isEqualToString:@"Description"]) {
         if ([item isKindOfClass:[TestSequence class]]) {
             TestSequence *ts = item;
@@ -72,6 +72,8 @@
         TestExecElement *tee = item;
         [tee setMName:object];
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName: @"RowUpdated" object: item];
 }
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)theColumn byItem:(id)item
 {

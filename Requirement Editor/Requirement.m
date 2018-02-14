@@ -17,7 +17,7 @@
     return self;
 }
 - (NSString *)description {
-    return [NSString stringWithFormat: @"<Requirement dbid=\"%d\" Name=\"%@\" status=\"%@\" uid=\"%d\">\n    <Description>%@</Description>", _mDbid, _mName, _mStatus, _mUid, _mDescription];
+    return [NSString stringWithFormat: @"<Requirement dbid=\"%@\" Name=\"%@\" status=\"%@\" uid=\"%@\">\n    <Description>%@</Description>", _mDbid, _mName, _mStatus, _mUid, _mDescription];
 }
 
 @end

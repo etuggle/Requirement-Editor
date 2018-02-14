@@ -26,9 +26,6 @@
 
     // Update the view, if already loaded.
 }
-
-- (IBAction)foo:(NSButton *)sender {
-}
  
 - (IBAction) openDocument:() sender {
     NSLog(@"open document");
@@ -91,13 +88,22 @@
             
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(editingDidEnd:)
                                                          name:NSControlTextDidEndEditingNotification object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(blah:) name:@"RowUpdated" object: nil];
         }
     }];
 }
+
+-(void) blah:(NSNotification *)notification {
+    NSLog(@"here i am");
+    [self updateItem:notification.object];
+}
+
 // somewhere else in the .m file
 - (void)editingDidEnd:(NSNotification *)notification {
     if (notification.object == _reqViewCtrl) {
         [_assocReqViewControl reloadData];
+    } else if (notification.object == _seqViewControl) {
+        [self updateItem];
     } else {
         [_reqViewCtrl reloadData];
     }
@@ -149,9 +155,9 @@
                 NSXMLElement *projectElement = (NSXMLElement *)[NSXMLNode elementWithName:@"Project"];
                 dict = [[NSMutableDictionary alloc] init];
                 dict[@"PythonPath"] = projectToSave.mPythonPath;
-                dict[@"dbid"] = [[NSString alloc]initWithFormat:@"%d", projectToSave.mDbid];
+                dict[@"dbid"] = [[NSString alloc]initWithFormat:@"%@", projectToSave.mDbid];
                 dict[@"name"] = projectToSave.mName;
-                dict[@"uid"] = [[NSString alloc]initWithFormat:@"%d", projectToSave.mUid];
+                dict[@"uid"] = [[NSString alloc]initWithFormat:@"%@", projectToSave.mUid];
                 [projectElement setAttributesWithDictionary:dict];
                 
                 // A project will always have a description
@@ -202,9 +208,9 @@
     
     NSXMLElement *element = (NSXMLElement *)[NSXMLNode elementWithName:elementName];
     dict = [[NSMutableDictionary alloc] init];
-    dict[@"dbid"] = [[NSString alloc]initWithFormat:@"%d", teElement.mDbid];
+    dict[@"dbid"] = [[NSString alloc]initWithFormat:@"%@", teElement.mDbid];
     dict[@"name"] = teElement.mName;
-    dict[@"uid"] = [[NSString alloc]initWithFormat:@"%d", teElement.mUid];
+    dict[@"uid"] = [[NSString alloc]initWithFormat:@"%@", teElement.mUid];
     [element setAttributesWithDictionary:dict];
     
     // Each requirement should have a description
@@ -335,12 +341,25 @@
             NSLog(@"%@ - %@", a.mName, a.mExternalId);
         }
         
+        // If the test definition doesn't have a script, we'll need to create and
+        // add one
+        if (td.script == NULL) {
+            Script * script = [Script alloc];
+            [td setScript:script];
+            NSTimeInterval timeInSeconds = [[NSDate date] timeIntervalSince1970];
+            NSString *timeString =[NSString stringWithFormat:@"%0.0f", timeInSeconds*1e7];
+            
+            // We need to generate a new dbid and uid.
+            [script setMUid:timeString];
+            [script setMDbid:timeString];
+            [script setMName:timeString];
+        }
         [_itemName setStringValue:td.mName ?: @"None"];
         [_itemStatus setStringValue:td.mStatus ?: @"UNTESTED"];
         [_itemArguments setStringValue:td.script.arguments ?: @"-v"];
         [_itemParamFile setStringValue:td.script.paramFile ?:@""];
         [_itemGlobalFile setStringValue:td.script.globalFile ?:@""];
-        [_itemScriptPath setStringValue:td.script.scriptRelPath ?:@""];
+        [_itemScriptPath setStringValue:td.script.scriptRelPath ?:@"../builtInTest/factory.att/yourTest.py"];
         [_itemScriptCmLoc setStringValue:td.script.scriptCMLoc ?:@"" ] ;
         [_itemPythonPath setStringValue:td.script.pythonPath ?:@""];
         [_itemDescription setString:td.mDescription ?:@""];
@@ -363,6 +382,43 @@
 }
 -(void)textDidChange:(NSNotification *)notification {
     [self updateItem];
+}
+- (IBAction)AddTestItem:(id)sender {
+    // Need to determine if we are adding a Test Definition or a Test
+    // Sequence.
+    id selectedItem = [_seqViewControl itemAtRow:[_seqViewControl selectedRow]];
+    if (selectedItem == NULL) {
+        // Nothing is selected so insert a new test sequence.
+        NSLog(@"Insert a new test sequence.");
+        
+    } else {
+        // A test sequence or test definition is selected.
+        // If a test definition is selected we'll need to find the parent for the definition.
+        // The parent is the associated test sequence.
+        TestSequence *ts = NULL;
+        
+        if ([selectedItem isKindOfClass:[TestDefinition class]]) {
+            // Get the associated test sequence.
+            ts = [_seqViewControl parentForItem:selectedItem];
+        } else {
+            // A sequence was selected.
+            ts = (TestSequence *)selectedItem;
+        }
+        // Create and add the new test definition
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        dict[@"name"] = @"Test Definition Name";
+        NSTimeInterval timeInSeconds = [[NSDate date] timeIntervalSince1970];
+        NSString *timeString =[NSString stringWithFormat:@"%0.0f", timeInSeconds*1e7];
+       
+        dict[@"dbid"] =timeString;
+        dict[@"uid"] = timeString;
+        TestDefinition *td = [[TestDefinition alloc] initWithDict:dict];
+        td.mDescription = @" *** Enter a description ***";
+        
+        [ts addTestDefinition:td];
+         NSLog(@"Insert a test definition into Test Sequence: %@", ts.mName);
+     }
+     [_seqViewControl reloadData];
 }
 
 -(void) updateItem {
@@ -389,7 +445,7 @@
         [td setMDescription:value];
     }
     [_seqViewControl setNeedsDisplay:YES];
-
+   
 
 }
 

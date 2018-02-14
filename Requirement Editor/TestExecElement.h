@@ -11,8 +11,10 @@
 @interface TestExecElement : NSObject {
     NSString *_mName;
     NSString *_mDescription;
-    int _mDbid;
-    int _mUid;
+    //int _mDbid;
+    //int _mUid;
+    NSString * _mDbid;
+    NSString * _mUid;
 }
 
 -(instancetype)initWithDict:(NSDictionary *)dict NS_DESIGNATED_INITIALIZER;
@@ -20,8 +22,9 @@
 
 @property (nonatomic,strong) NSString *mName;
 @property (nonatomic,strong) NSString *mDescription;
-@property (nonatomic, readwrite, assign) int mDbid;
-@property (nonatomic, readwrite, assign) int mUid;
-
+//@property (nonatomic, readwrite, assign) int mDbid;
+//@property (nonatomic, readwrite, assign) int mUid;
+@property NSString * mDbid;
+@property  NSString * mUid;
 @end
 

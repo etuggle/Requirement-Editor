@@ -16,7 +16,7 @@
     return self;
 }
 - (NSString *)description {
-    return [NSString stringWithFormat: @"<TestSequence dbid=\"%d\" Name=\"%@\" uid=\"%d\">\n    <Description>%@</Description>", _mDbid, _mName, _mUid, _mDescription];
+    return [NSString stringWithFormat: @"<TestSequence dbid=\"%@\" Name=\"%@\" uid=\"%@\">\n    <Description>%@</Description>", _mDbid, _mName, _mUid, _mDescription];
     
 }
 - (void) addTestDefinition:(TestDefinition *)testDef {

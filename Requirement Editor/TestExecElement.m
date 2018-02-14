@@ -15,8 +15,10 @@
     self = [super init];
 
     _mName = dict[@"name"];
-    _mDbid = [dict[@"dbid"] intValue];
-    _mUid = [dict[@"uid"] intValue];
+    //_mDbid = [dict[@"dbid"] intValue];
+    //_mUid = [dict[@"uid"] intValue];
+    _mDbid = dict[@"dbid"];
+    _mUid = dict[@"uid"];
     _mDescription = nil;
     return self;
 }

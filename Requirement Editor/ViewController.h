@@ -25,6 +25,7 @@
 @property (weak) IBOutlet NSTextField *numTests;
 @property (weak) IBOutlet NSOutlineView *seqViewControl;
 @property (weak) IBOutlet NSTableView *assocReqViewControl;
+@property (weak) IBOutlet NSScrollView *borderedScrollViewOutline;
 
 @property (weak) IBOutlet NSTextField *itemName;
 @property (weak) IBOutlet NSTextField *itemStatus;
